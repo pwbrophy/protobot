@@ -31,12 +31,12 @@ class MyApp(App):
 
     # listener function
     def on_button_pressed(self, widget):
-        print("Chonk")
+        print("whoops")
         time.sleep(2)
-        print("whooples")
+        print("chonkle")
 
 # starts the web server
-start(MyApp)
+start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
 
 print("ok we got here")
 
