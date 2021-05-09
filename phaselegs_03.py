@@ -37,6 +37,8 @@ class MyApp(App):
 # starts the web server
 start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=True, multiple_instance=True)
 
+print("ok we got here")
+
 number_of_servos = 12
 
 # Define hip positions
