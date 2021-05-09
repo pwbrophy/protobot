@@ -10,30 +10,6 @@ import robot_leg_functions
 import remi.gui as gui
 from remi import start, App
 
-class MyApp(App):
-    def __init__(self, *args):
-        super(MyApp, self).__init__(*args)
-
-    def main(self):
-        container = gui.VBox(width=120, height=100)
-        self.lbl = gui.Label('Hello world!')
-        self.bt = gui.Button('Press me!')
-
-        # setting the listener for the onclick event of the button
-        self.bt.onclick.do(self.on_button_pressed)
-
-        # appending a widget to another, the first argument is a string key
-        container.append(self.lbl)
-        container.append(self.bt)
-
-        # returning the root widget
-        return container
-
-    # listener function
-    def on_button_pressed(self, widget):
-        do_walk_forwards()
-
-
 number_of_servos = 12
 
 # Define hip positions
@@ -78,6 +54,29 @@ knee_set_b = [7, 9, 11]
 
 right_hips = [0, 1, 2]
 left_hips = [3, 4, 5]
+
+class MyApp(App):
+    def __init__(self, *args):
+        super(MyApp, self).__init__(*args)
+
+    def main(self):
+        container = gui.VBox(width=120, height=100)
+        self.lbl = gui.Label('Hello world!')
+        self.bt = gui.Button('Press me!')
+
+        # setting the listener for the onclick event of the button
+        self.bt.onclick.do(self.on_button_pressed)
+
+        # appending a widget to another, the first argument is a string key
+        container.append(self.lbl)
+        container.append(self.bt)
+
+        # returning the root widget
+        return container
+
+    # listener function
+    def on_button_pressed(self, widget):
+        do_walk_forwards()
 
 def do_walk_forwards():
     for phase in range(number_of_phases):
