@@ -25,7 +25,7 @@ robot_leg_functions.center_servos(hip_center, knee_center, kit)
 
 time.sleep(2)
 
-phase_duration = 0.3
+phase_duration = 0.4
 pause_between_phases = 0
 
 phase_start_time = time.time()
