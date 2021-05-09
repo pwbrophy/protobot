@@ -10,24 +10,24 @@ import robot_leg_functions
 import remi.gui as gui
 from remi import start, App
 
-number_of_servos = 12
+global number_of_servos = 12
 
 # Define hip positions
-hip_center = 90
-hip_forwards = 60
-hip_backwards = 120
+global hip_center = 90
+global hip_forwards = 60
+global hip_backwards = 120
 
 # Define knee positions
-knee_center = 80
-knee_up = 40
-knee_down = 90
+global knee_center = 80
+global knee_up = 40
+global knee_down = 90
 
 # Initialise the starting positions for the hips
-hip_current_angle_a = hip_center
-hip_current_angle_b = hip_center
+global hip_current_angle_a = hip_center
+global hip_current_angle_b = hip_center
 
-knee_current_angle_a = knee_center
-knee_current_angle_b = knee_center
+global knee_current_angle_a = knee_center
+global knee_current_angle_b = knee_center
 
 # Center the legs
 robot_leg_functions.center_servos(hip_center, knee_center, kit)
@@ -36,24 +36,24 @@ robot_leg_functions.center_servos(hip_center, knee_center, kit)
 time.sleep(2)
 
 # Phases
-phase_duration = 0.4
-pause_between_phases = 0
-phase_start_time = time.time()
-number_of_phases = 4
-current_phase = 0
+global phase_duration = 0.4
+global pause_between_phases = 0
+global phase_start_time = time.time()
+global number_of_phases = 4
+global current_phase = 0
 
 # Walk gait
-walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
-walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
+global walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
+global walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
 
 
-hip_set_a = [0, 2, 4]
-hip_set_b = [1, 3, 5]
-knee_set_a = [6, 8, 10]
-knee_set_b = [7, 9, 11]
+global hip_set_a = [0, 2, 4]
+global hip_set_b = [1, 3, 5]
+global knee_set_a = [6, 8, 10]
+global knee_set_b = [7, 9, 11]
 
-right_hips = [0, 1, 2]
-left_hips = [3, 4, 5]
+global right_hips = [0, 1, 2]
+global left_hips = [3, 4, 5]
 
 class MyApp(App):
     def __init__(self, *args):
