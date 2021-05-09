@@ -21,7 +21,7 @@ hip_current_angle_b = hip_center
 knee_current_angle_a = knee_center
 knee_current_angle_b = knee_center
 
-robot_leg_functions.center_servos(hip_center, knee_center)
+robot_leg_functions.center_servos(hip_center, knee_center, kit)
 
 time.sleep(2)
 
