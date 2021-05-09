@@ -1,6 +1,6 @@
 
 
-def center_servos():
+def center_servos(hip_center, knee_center):
     for servos in range(0, 6):
         kit.servo[servos].angle = hip_center
 
