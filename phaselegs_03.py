@@ -31,14 +31,8 @@ class MyApp(App):
 
     # listener function
     def on_button_pressed(self, widget):
-        print("whoops")
-        time.sleep(2)
-        print("chonkle")
+        do_walk_forwards()
 
-# starts the web server
-start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
-
-print("ok we got here")
 
 number_of_servos = 12
 
@@ -85,7 +79,7 @@ knee_set_b = [7, 9, 11]
 right_hips = [0, 1, 2]
 left_hips = [3, 4, 5]
 
-while True:
+def do_walk_forwards():
     for phase in range(number_of_phases):
         # Generate smooth curves
 
@@ -138,3 +132,7 @@ while True:
                 phase_start_time = time.time()
                 time.sleep(pause_between_phases)
                 break
+
+# starts the web server
+start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
+
