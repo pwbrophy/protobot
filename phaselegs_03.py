@@ -57,17 +57,17 @@ class MyApp(App):
 
     def on_button_pressed(self, emitter):
         print("The button got clicked")
+        global robot_is_walking
         robot_is_walking = True
 
     def on_close(self):
         self.thread_alive_flag = False
         super(MyApp, self).on_close()
 
-
-
 def robot_walk_forwards():
-    number_of_servos = 12
 
+    number_of_servos = 12
+    global robot_is_walking
     # Define hip positions
     hip_center = 90
     hip_forwards = 60
