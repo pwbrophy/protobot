@@ -214,4 +214,4 @@ def robot_walk_forwards():
                         break
 
 # starts the web server
-start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
+start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
