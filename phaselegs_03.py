@@ -1,7 +1,7 @@
 from adafruit_servokit import ServoKit
 import time
 
-kit = ServoKit(channels=16)
+
 from easing_functions import *
 import numpy as np
 
@@ -65,6 +65,8 @@ class MyApp(App):
         super(MyApp, self).on_close()
 
 def robot_walk_forwards():
+
+    kit = ServoKit(channels=16)
 
     number_of_servos = 12
     global robot_is_walking
