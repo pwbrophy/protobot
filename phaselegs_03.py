@@ -10,6 +10,9 @@ import robot_leg_functions
 import remi.gui as gui
 from remi import start, App
 
+import threading
+
+
 # Walking state
 global robot_is_walking
 robot_is_walking = False
