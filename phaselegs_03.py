@@ -7,7 +7,7 @@ import numpy as np
 
 import robot_leg_functions
 
-import remi.gui as gui
+from remi.gui import *
 from remi import start, App
 
 import threading
