@@ -175,7 +175,7 @@ def robot_walk_forwards():
                     # Calculate and move the knees
                     for servo in knee_set_a:
                         angle_for_this_servo = knee_curve_a.ease(current_time_from_zero)
-                        print("angle problem is "angle_for_this_servo)
+                        print("angle problem is ", angle_for_this_servo)
                         kit.servo[servo].angle = angle_for_this_servo
                     for servo in knee_set_b:
                         angle_for_this_servo = knee_curve_b.ease(current_time_from_zero)
