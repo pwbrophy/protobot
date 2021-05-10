@@ -96,9 +96,9 @@ def robot_walk_forwards():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.4
+    phase_duration = 1
     pause_between_phases = 0
-    phase_start_time = time.time()
+
     number_of_phases = 4
     current_phase = 0
 
@@ -117,6 +117,10 @@ def robot_walk_forwards():
     print("Starting our loop!")
     while True:
         if robot_is_walking:
+
+            # Reset our timer
+            phase_start_time = time.time()
+
             for phase in range(number_of_phases):
 
                 # Generate smooth curves for 'set A' of legs
