@@ -21,7 +21,6 @@ class MyApp(App):
     def __init__(self, *args):
         super(MyApp, self).__init__(*args)
 
-
     def main(self):
         hbox0 = HBox()
         hbox0.attr_class = "HBox"
@@ -55,8 +54,6 @@ class MyApp(App):
         # Here I start a parallel thread that executes my algorithm for a long time
         t = threading.Thread(target=self.my_intensive_long_time_algorithm)
         t.start()
-
-
 
         # returning the root widget
         self.hbox0 = hbox0
@@ -161,6 +158,8 @@ def robot_walk_forwards():
                 # knee_curve = CubicEaseInOut(start=knee_current_angle, end=walk_forwards_knee_phase_order[phase], duration=phase_duration)
 
                 while True:
+
+                    time.sleep(0.05)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
