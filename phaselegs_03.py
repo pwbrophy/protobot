@@ -63,8 +63,6 @@ class MyApp(App):
         self.thread_alive_flag = False
         super(MyApp, self).on_close()
 
-# starts the web server
-start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
 
 
 def robot_walk_forwards():
@@ -111,6 +109,7 @@ def robot_walk_forwards():
 
     right_hips = [0, 1, 2]
     left_hips = [3, 4, 5]
+
     print("Starting our loop!")
     while True:
         if robot_is_walking:
@@ -191,3 +190,5 @@ def robot_walk_forwards():
                         # Break out and go to the next phase
                         break
 
+# starts the web server
+start(MyApp, debug=True, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
