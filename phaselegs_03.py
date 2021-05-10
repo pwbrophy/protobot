@@ -52,9 +52,11 @@ class MyApp(App):
         return wid
 
     def my_intensive_long_time_algorithm(self):
+        print("Turn on robot walking function")
         robot_walk_forwards()
 
     def on_button_pressed(self, emitter):
+        print("The button got clicked")
         robot_is_walking = True
 
     def on_close(self):
