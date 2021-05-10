@@ -159,7 +159,7 @@ def robot_walk_forwards():
 
                 while True:
 
-                    time.sleep(0.05)
+                    time.sleep(0.01)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
