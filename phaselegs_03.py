@@ -45,8 +45,8 @@ class MyApp(App):
         t = threading.Thread(target=self.my_intensive_long_time_algorithm)
         t.start()
 
-        bt.onmousedown.do(self.on_button_pressed)
-        bt.onmouseup.do(self.on_button_released)
+        bt.onclick.do(self.on_button_pressed)
+
 
         # returning the root widget
         return wid
@@ -56,9 +56,6 @@ class MyApp(App):
 
     def on_button_pressed(self, emitter):
         robot_is_walking = True
-
-    def on_button_released(self, emitter):
-        robot_is_walking = False
 
     def on_close(self):
         self.thread_alive_flag = False
