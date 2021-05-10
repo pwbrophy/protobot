@@ -21,23 +21,34 @@ class MyApp(App):
     def __init__(self, *args):
         super(MyApp, self).__init__(*args)
 
-    def idle(self):
-        # this function is called automatically by remi library at specific interval
-        # so here I can assign values to widget
-        self.lbl.set_text('Thread result:' + str(self.my_thread_result))
 
     def main(self):
-        # margin 0px auto allows to center the app to the screen
-        wid = gui.VBox(width=300, height=200, margin='0px auto')
-        self.lbl = gui.Label('Thread result:', width='80%', height='50%')
-        self.lbl.style['margin'] = 'auto'
-
-        bt = gui.Button('Stop algorithm', width=200, height=30)
-        bt.style['margin'] = 'auto 50px'
-        bt.style['background-color'] = 'red'
-
-        wid.append(self.lbl)
-        wid.append(bt)
+        hbox0 = HBox()
+        hbox0.attr_class = "HBox"
+        hbox0.attr_editor_newclass = False
+        hbox0.css_align_items = "center"
+        hbox0.css_display = "flex"
+        hbox0.css_flex_direction = "row"
+        hbox0.css_height = "250px"
+        hbox0.css_justify_content = "space-around"
+        hbox0.css_left = "184.234375px"
+        hbox0.css_position = "absolute"
+        hbox0.css_top = "118.21875px"
+        hbox0.css_width = "250px"
+        hbox0.variable_name = "hbox0"
+        button0 = Button()
+        button0.attr_class = "Button"
+        button0.attr_editor_newclass = False
+        button0.css_height = "30px"
+        button0.css_order = "-1"
+        button0.css_position = "static"
+        button0.css_top = "206.21875px"
+        button0.css_width = "100px"
+        button0.text = "button"
+        button0.variable_name = "button0"
+        hbox0.append(button0,'button0')
+        hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
+        hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
 
         self.thread_alive_flag = True
         self.my_thread_result = 0
@@ -47,20 +58,24 @@ class MyApp(App):
 
         bt.onclick.do(self.on_button_pressed)
 
-
         # returning the root widget
-        return wid
+        self.hbox0 = hbox0
+        return self.hbox0
 
     def my_intensive_long_time_algorithm(self):
         print("Turn on robot walking function")
         robot_walk_forwards()
 
-    def on_button_pressed(self, emitter):
-        print("The button got clicked")
+    def onmousedown_button0(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = True
 
-    def on_close(self):
+    def onmouseup_button0(self, emitter, x, y):
+        global robot_is_walking
+        robot_is_walking = False
+
+
+def on_close(self):
         self.thread_alive_flag = False
         super(MyApp, self).on_close()
 
