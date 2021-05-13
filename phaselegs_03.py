@@ -169,7 +169,7 @@ def robot_walk_forwards():
                 while True:
 
                     # Sleep a bit so that we don't hammer the processor
-                    time.sleep(0.02)
+                    time.sleep(0.005)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
@@ -209,7 +209,7 @@ def robot_walk_forwards():
                         kit.servo[servo].angle = angle_for_this_servo
 
                     # When the phase ends
-                    if phase_duration < current_time_from_zero:
+                    if phase_duration < current_time_from_zero or not robot_is_walking:
                         # Set the current angle to the target angle for each sevo type
                         hip_current_angle_a = walk_forwards_hip_phase_order[phase]
                         hip_current_angle_b = walk_forwards_hip_phase_order[phase_b]
