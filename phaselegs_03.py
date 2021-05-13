@@ -49,6 +49,9 @@ class MyApp(App):
         hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
         hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
 
+        hbox0.children['button0'].ontouchstart.do(self.onmousedown_button0)
+        hbox0.children['button0'].ontouchend.do(self.onmouseup_button0)
+
         self.thread_alive_flag = True
         self.my_thread_result = 0
         # Here I start a parallel thread that executes my algorithm for a long time
