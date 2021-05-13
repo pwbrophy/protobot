@@ -46,8 +46,8 @@ class MyApp(App):
         button0.text = "button"
         button0.variable_name = "button0"
         hbox0.append(button0,'button0')
-        hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
-        hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
+        #hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
+        #hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
 
         hbox0.children['button0'].ontouchstart.do(self.onmousedown_button0)
         hbox0.children['button0'].ontouchend.do(self.onmouseup_button0)
