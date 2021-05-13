@@ -22,35 +22,40 @@ class MyApp(App):
         super(MyApp, self).__init__(*args)
 
     def main(self):
-        hbox0 = HBox()
-        hbox0.attr_class = "HBox"
-        hbox0.attr_editor_newclass = False
-        hbox0.css_align_items = "center"
-        hbox0.css_display = "flex"
-        hbox0.css_flex_direction = "row"
-        hbox0.css_height = "250px"
-        hbox0.css_justify_content = "space-around"
-        hbox0.css_left = "184.234375px"
-        hbox0.css_position = "absolute"
-        hbox0.css_top = "118.21875px"
-        hbox0.css_width = "250px"
-        hbox0.variable_name = "hbox0"
-        button0 = Button()
-        button0.attr_class = "Button"
-        button0.attr_editor_newclass = False
-        button0.css_height = "30px"
-        button0.css_order = "-1"
-        button0.css_position = "static"
-        button0.css_top = "206.21875px"
-        button0.css_width = "100px"
-        button0.text = "button"
-        button0.variable_name = "button0"
-        hbox0.append(button0,'button0')
+        #DON'T MAKE CHANGES HERE, THIS METHOD GETS OVERWRITTEN WHEN SAVING IN THE EDITOR
+        svg0 = Svg()
+        svg0.attr_class = "Svg"
+        svg0.attr_editor_newclass = False
+        svg0.css_height = "255.0px"
+        svg0.css_left = "60.0px"
+        svg0.css_position = "absolute"
+        svg0.css_top = "60.0px"
+        svg0.css_width = "270.0px"
+        svg0.variable_name = "svg0"
+        svgcircle0 = SvgCircle()
+        svgcircle0.attr_class = "SvgCircle"
+        svgcircle0.attr_cx = 135.0
+        svgcircle0.attr_cy = 120.0
+        svgcircle0.attr_editor_newclass = False
+        svgcircle0.attr_fill = "rgb(200,200,200)"
+        svgcircle0.attr_r = "90.0"
+        svgcircle0.attr_stroke = "rgb(0,0,0)"
+        svgcircle0.css_left = "190.875px"
+        svgcircle0.css_top = "165.90625px"
+        svgcircle0.variable_name = "svgcircle0"
+        svg0.append(svgcircle0,'svgcircle0')
+        svg0.ontouchend.do(self.walk_forwards_begin)
+        svg0.ontouchstart.do(self.walk_forwards_end)
+
+
+
+
+
         #hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
         #hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
 
-        hbox0.children['button0'].ontouchstart.do(self.onmousedown_button0)
-        hbox0.children['button0'].ontouchend.do(self.onmouseup_button0)
+        #hbox0.children['button0'].ontouchstart.do(self.walk_forwards_begin)
+        #hbox0.children['button0'].ontouchend.do(self.walk_forwards_end)
 
         self.thread_alive_flag = True
         self.my_thread_result = 0
@@ -59,18 +64,19 @@ class MyApp(App):
         t.start()
 
         # returning the root widget
-        self.hbox0 = hbox0
-        return self.hbox0
+        self.svg0 = svg0
+        return self.svg0
+
 
     def my_intensive_long_time_algorithm(self):
         print("Turn on robot walking function")
         robot_walk_forwards()
 
-    def onmousedown_button0(self, emitter, x, y):
+    def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = True
 
-    def onmouseup_button0(self, emitter, x, y):
+    def walk_forwards_end(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = False
 
