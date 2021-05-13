@@ -44,8 +44,8 @@ class MyApp(App):
         svgcircle0.css_top = "165.90625px"
         svgcircle0.variable_name = "svgcircle0"
         svg0.append(svgcircle0,'svgcircle0')
-        svg0.ontouchend.do(self.walk_forwards_begin)
-        svg0.ontouchstart.do(self.walk_forwards_end)
+        svg0.ontouchstart.do(self.walk_forwards_begin)
+        svg0.ontouchend.do(self.walk_forwards_end)
 
 
 
