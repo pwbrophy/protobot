@@ -168,7 +168,8 @@ def robot_walk_forwards():
 
                 while True:
 
-                    time.sleep(0.01)
+                    # Sleep a bit so that we don't hammer the processor
+                    time.sleep(0.02)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
