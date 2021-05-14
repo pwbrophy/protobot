@@ -49,7 +49,7 @@ class MyApp(App):
         self.thread_alive_flag = True
         self.my_thread_result = 0
         # Here I start a parallel thread that executes my algorithm for a long time
-        t = threading.Thread(target=my_intensive_long_time_algorithm)
+        t = threading.Thread(target=self.my_intensive_long_time_algorithm)
         t.start()
 
         # returning the root widget
