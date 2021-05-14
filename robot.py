@@ -22,7 +22,6 @@ class MyApp(App):
         super(MyApp, self).__init__(*args)
 
     def main(self):
-        #DON'T MAKE CHANGES HERE, THIS METHOD GETS OVERWRITTEN WHEN SAVING IN THE EDITOR
         svg0 = Svg()
         svg0.attr_class = "Svg"
         svg0.attr_editor_newclass = False
@@ -47,30 +46,15 @@ class MyApp(App):
         svg0.ontouchstart.do(self.walk_forwards_begin)
         svg0.ontouchend.do(self.walk_forwards_end)
 
-
-
-
-
-        #hbox0.children['button0'].onmousedown.do(self.onmousedown_button0)
-        #hbox0.children['button0'].onmouseup.do(self.onmouseup_button0)
-
-        #hbox0.children['button0'].ontouchstart.do(self.walk_forwards_begin)
-        #hbox0.children['button0'].ontouchend.do(self.walk_forwards_end)
-
         self.thread_alive_flag = True
         self.my_thread_result = 0
         # Here I start a parallel thread that executes my algorithm for a long time
-        t = threading.Thread(target=self.my_intensive_long_time_algorithm)
+        t = threading.Thread(target=turn_on_robot_locomotion())
         t.start()
 
         # returning the root widget
         self.svg0 = svg0
         return self.svg0
-
-
-    def my_intensive_long_time_algorithm(self):
-        print("Turn on robot walking function")
-        robot_walk_forwards()
 
     def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
@@ -82,10 +66,10 @@ class MyApp(App):
 
 
 def on_close(self):
-        self.thread_alive_flag = False
-        super(MyApp, self).on_close()
+    self.thread_alive_flag = False
+    super(MyApp, self).on_close()
 
-def robot_walk_forwards():
+def turn_on_robot_locomotion():
 
     kit = ServoKit(channels=16)
 
