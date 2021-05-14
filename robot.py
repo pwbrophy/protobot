@@ -49,12 +49,16 @@ class MyApp(App):
         self.thread_alive_flag = True
         self.my_thread_result = 0
         # Here I start a parallel thread that executes my algorithm for a long time
-        t = threading.Thread(target=turn_on_robot_locomotion())
+        t = threading.Thread(target=my_intensive_long_time_algorithm)
         t.start()
 
         # returning the root widget
         self.svg0 = svg0
         return self.svg0
+
+    def my_intensive_long_time_algorithm(self):
+        print("Turn on robot walking function")
+        turn_on_robot_locomotion()
 
     def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
