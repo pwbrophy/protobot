@@ -102,10 +102,7 @@ def turn_on_robot_locomotion():
 
     # Phases
     phase_duration = 0.3
-    pause_between_phases = 0
-
     number_of_phases = 4
-    current_phase = 0
 
     # Walk forwads gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
@@ -136,7 +133,7 @@ def turn_on_robot_locomotion():
 
                 # Advance the phase by 2 for the alternate legs
                 phase_b = phase + 2
-
+                # Loop the phase back if the phase is greater than the number of phases
                 if phase_b > number_of_phases - 1:
                     phase_b = phase_b - 4
 
