@@ -182,8 +182,8 @@ def turn_on_robot_locomotion():
 
                     # Apply turning multiplier
                     servo_params_for_turning = servo_params[servo]
-                    # Right legs
-                    if servo_params_for_turning[2]:
+                    # Right hips
+                    if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
                         angle_for_this_servo = (offset * -1) + hip_center
 
