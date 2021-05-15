@@ -8,8 +8,7 @@ def center_servos(hip_center, knee_center, kit):
         kit.servo[servos].angle = knee_center
 
 
-def generate_servo_movement_curve(servo,
-                                  this_servo_current_position,
+def generate_servo_movement_curve(this_servo_current_position,
                                   this_servo_params,
                                   phase,
                                   hip_target_position_phase,
@@ -20,6 +19,7 @@ def generate_servo_movement_curve(servo,
                                   hip_center,
                                   knee_center):
 
+knee_center)
     set_a_phase = phase
     set_b_phase = (phase + 2) % 4
 
