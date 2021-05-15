@@ -93,7 +93,7 @@ def turn_on_robot_locomotion():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.3
+    phase_duration = 0.15
     number_of_phases = 4
     phase = 0
 
