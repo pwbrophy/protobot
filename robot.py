@@ -102,8 +102,8 @@ def turn_on_robot_locomotion():
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
 
     # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear
-    walk_forwards_hip_smooth = [1, 2, 1, 2]
-    walk_forwards_knee_smooth = [0, 0, 0, 0]
+    walk_forwards_hip_smooth = [3, 3, 3, 3]
+    walk_forwards_knee_smooth = [3, 3, 3, 3]
 
     # Set each servo parameters
     servo_params = []
@@ -150,58 +150,54 @@ def turn_on_robot_locomotion():
             # Set our timer for the first loop
             phase_start_time = time.time()
 
+            # Generate curve for each servo
+            for servo in range(0, number_of_servos):
+                this_servo_current_position = servo_current_position[servo]
+                this_servo_params = servo_params[servo]
+                # servo number | start position | servo parameters | phase
+                servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
+                                                                                        this_servo_params,
+                                                                                        phase,
+                                                                                        walk_forwards_hip_phase_order,
+                                                                                        walk_forwards_hip_smooth,
+                                                                                        walk_forwards_knee_phase_order,
+                                                                                        walk_forwards_knee_smooth,
+                                                                                        phase_duration,
+                                                                                        hip_center,
+                                                                                        knee_center
+                                                                                        )
+
             while True:
+                # Sleep a bit so that we don't hammer the processor
+                time.sleep(0.005)
 
-                # Generate curve for each servo
+                # Start a timer for the phase
+                current_time_from_zero = time.time() - phase_start_time
+
+                # Go through each servo
                 for servo in range(0, number_of_servos):
-                    print("Generating curve for servo ", servo, "in phase ", phase)
-                    this_servo_current_position = servo_current_position[servo]
-                    this_servo_params = servo_params[servo]
-                    # servo number | start position | servo parameters | phase
-                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
-                                                                                            this_servo_params,
-                                                                                            phase,
-                                                                                            walk_forwards_hip_phase_order,
-                                                                                            walk_forwards_hip_smooth,
-                                                                                            walk_forwards_knee_phase_order,
-                                                                                            walk_forwards_knee_smooth,
-                                                                                            phase_duration,
-                                                                                            hip_center,
-                                                                                            knee_center
-                                                                                            )
 
-                while True:
-                    print("moving the servos now")
-                    # Sleep a bit so that we don't hammer the processor
-                    time.sleep(0.005)
+                    # Calculate how much we need to move based on time
+                    angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
 
-                    # Start a timer for the phase
-                    current_time_from_zero = time.time() - phase_start_time
+                    # Move the servo
+                    kit.servo[servo].angle = angle_for_this_servo
 
-                    # Go through each servo
-                    for servo in range(0, number_of_servos):
+                    # Record the current angle for each servo
+                    servo_current_position[servo] = angle_for_this_servo
 
-                        # Calculate how much we need to move based on time
-                        angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
+                # When the phase ends
+                if phase_duration < current_time_from_zero or not robot_is_walking:
+                    print("Phase ended or the robot stopped walking")
+                    # Reset the timer
+                    phase_start_time = time.time()
 
-                        # Move the servo
-                        kit.servo[servo].angle = angle_for_this_servo
-
-                        # Record the current angle for each servo
-                        servo_current_position[servo] = angle_for_this_servo
-
-                    # When the phase ends
-                    if phase_duration < current_time_from_zero or not robot_is_walking:
-                        print("Phase ended or the robot stopped walking")
-                        # Reset the timer
-                        phase_start_time = time.time()
-
-                        # Move to the next phase
-                        phase += 1
-                        phase = phase % 4
-                        print(phase)
-                        # Break out and go to the next phase
-                        break
+                    # Move to the next phase
+                    phase += 1
+                    phase = phase % 4
+                    print(phase)
+                    # Break out and go to the next phase
+                    break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
