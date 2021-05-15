@@ -93,7 +93,7 @@ def turn_on_robot_locomotion():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.6
+    phase_duration = 0.3
     number_of_phases = 4
     phase = 0
 
@@ -101,9 +101,9 @@ def turn_on_robot_locomotion():
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
 
-    # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear
-    walk_forwards_hip_smooth = [3, 3, 3, 3]
-    walk_forwards_knee_smooth = [3, 3, 3, 3]
+    # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
+    walk_forwards_hip_smooth = [2, 1, 2, 1]
+    walk_forwards_knee_smooth = [1, 2, 1, 2]
 
     # Set each servo parameters
     servo_params = []
