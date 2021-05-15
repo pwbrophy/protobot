@@ -146,7 +146,6 @@ def turn_on_robot_locomotion():
     print("Starting our loop!")
     while True:
         if robot_is_walking:
-            print("Robot has started walking!")
             # Set our timer for the first loop
             phase_start_time = time.time()
 
@@ -185,13 +184,13 @@ def turn_on_robot_locomotion():
                     # Right hips
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        offset = offset*(0)
+                        offset = offset*(-1)
                         angle_for_this_servo = hip_center + offset
                     # Left hips
-                    if servo_params_for_turning[0] and not servo_params_for_turning[2]:
-                        offset = angle_for_this_servo - hip_center
-                        #offset = offset*(1)
-                        angle_for_this_servo = hip_center + offset
+                    #if servo_params_for_turning[0] and not servo_params_for_turning[2]:
+                    #    offset = angle_for_this_servo - hip_center
+                    #    #offset = offset*(1)
+                    #    angle_for_this_servo = hip_center + offset
 
                     # Move the servo
                     kit.servo[servo].angle = angle_for_this_servo
