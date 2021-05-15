@@ -100,9 +100,8 @@ def turn_on_robot_locomotion():
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
-
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
-    walk_forwards_hip_smooth = [2, 1, 2, 1]
+    walk_forwards_hip_smooth = [2, 3, 3, 1]
     walk_forwards_knee_smooth = [1, 2, 1, 2]
 
     # Set each servo parameters
@@ -125,6 +124,7 @@ def turn_on_robot_locomotion():
     servo_params[10] = [False, True, False]
     servo_params[11] = [False, False, False]
 
+    # Initialise the list of servo current angles
     servo_current_position = []
 
     for servo in range(0, number_of_servos):
@@ -138,7 +138,7 @@ def turn_on_robot_locomotion():
     for knee in range(6, 12):
         servo_current_position[knee] = knee_center
 
-    # Initialise our array which stores the servo curves
+    # Initialise our list which stores the servo curves
     servo_curves = []
     for servo in range(0, number_of_servos):
         servo_curves.append(0)
