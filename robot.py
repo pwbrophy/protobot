@@ -93,7 +93,7 @@ def turn_on_robot_locomotion():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.15
+    phase_duration = 0.3
     number_of_phases = 4
     phase = 0
 
@@ -101,8 +101,8 @@ def turn_on_robot_locomotion():
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
-    walk_forwards_hip_smooth = [2, 3, 3, 1]
-    walk_forwards_knee_smooth = [1, 2, 1, 2]
+    walk_forwards_hip_smooth = [2, 1, 2, 1]
+    walk_forwards_knee_smooth = [0, 0, 0, 0]
 
     # Set each servo parameters
     servo_params = []
@@ -169,7 +169,7 @@ def turn_on_robot_locomotion():
 
             while True:
                 # Sleep a bit so that we don't hammer the processor
-                time.sleep(0.005)
+                time.sleep(0.01)
 
                 # Start a timer for the phase
                 current_time_from_zero = time.time() - phase_start_time
@@ -179,6 +179,13 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
+
+                    # Apply turning multiplier
+                    servo_params_for_turning = servo_params[servo]
+                    # Right legs
+                    if servo_params_for_turning[2]:
+                        offset = angle_for_this_servo - hip_center
+                        angle_for_this_servo = (offset * 0.5) + hip_center
 
                     # Move the servo
                     kit.servo[servo].angle = angle_for_this_servo
