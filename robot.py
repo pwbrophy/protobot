@@ -93,7 +93,7 @@ def turn_on_robot_locomotion():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.3
+    phase_duration = 0.6
     number_of_phases = 4
     phase = 0
 
@@ -141,7 +141,7 @@ def turn_on_robot_locomotion():
     print("Starting our loop!")
     while True:
         if robot_is_walking:
-
+            print("Robot has started walking!")
             # Set our timer for the first loop
             phase_start_time = time.time()
 
@@ -149,6 +149,7 @@ def turn_on_robot_locomotion():
 
                 # Generate curve for each servo
                 for servo in range(0, number_of_servos):
+                    print("Generating curve for servo ", servo, "in phase ", phase)
                     this_servo_current_position = servo_current_position[servo]
                     this_servo_params = servo_params[servo]
                     # servo number | start position | servo parameters | phase
@@ -165,7 +166,7 @@ def turn_on_robot_locomotion():
                                                                                             knee_center)
 
                 while True:
-
+                    print("moving the servos now")
                     # Sleep a bit so that we don't hammer the processor
                     time.sleep(0.005)
 
@@ -181,12 +182,12 @@ def turn_on_robot_locomotion():
                         # Move the servo
                         kit.servo[servo].angle = angle_for_this_servo
 
-                        # Set the current angle to the target angle for each servo
+                        # Record the current angle for each servo
                         servo_current_position[servo] = angle_for_this_servo
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero or not robot_is_walking:
-
+                        print("Phase ended or the robot stopped walking")
                         # Reset the timer
                         phase_start_time = time.time()
 
