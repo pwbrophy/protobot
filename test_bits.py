@@ -1,12 +1,18 @@
-num_servos = 12
-servo_params = []
-
-for servo in range(0, num_servos):
-    servo_params.append(0)
-
-servo_params[0] = [1, 3, 5]
-servo_params[1] = [1, 3, 5]
-servo_params[2] = [1, 3, 5]
 
 
-print(servo_params)
+
+
+def flip(my_var, center):
+    x = my_var - center
+    z = center - x
+    print(z)
+
+a = 85
+b = 110
+center = 100
+
+flip(a, center)
+flip(b, center)
+
+c = 10 * (-1)
+print(c)
