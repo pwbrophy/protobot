@@ -169,7 +169,7 @@ def turn_on_robot_locomotion():
 
             while True:
                 # Sleep a bit so that we don't hammer the processor
-                time.sleep(0.01)
+                # time.sleep(0.01)
 
                 # Start a timer for the phase
                 current_time_from_zero = time.time() - phase_start_time
@@ -185,7 +185,7 @@ def turn_on_robot_locomotion():
                     # Right legs
                     if servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        angle_for_this_servo = (offset * 0.5) + hip_center
+                        angle_for_this_servo = (offset * -1) + hip_center
 
                     # Move the servo
                     kit.servo[servo].angle = angle_for_this_servo
