@@ -140,6 +140,8 @@ def turn_on_robot_locomotion():
 
     # Initialise our array which stores the servo curves
     servo_curves = []
+    for servo in range(0, number_of_servos):
+        servo_curves.append(0)
 
     print("Starting our loop!")
     while True:
@@ -165,7 +167,8 @@ def turn_on_robot_locomotion():
                                                                                             walk_forwards_knee_smooth,
                                                                                             phase_duration,
                                                                                             hip_center,
-                                                                                            knee_center)
+                                                                                            knee_center
+                                                                                            )
 
                 while True:
                     print("moving the servos now")
