@@ -52,8 +52,7 @@ def generate_servo_movement_curve(this_servo_current_position,
                 return calculate_curve(knee_smooth_phase[set_a_phase], this_servo_current_position, knee_target_position_phase[set_a_phase], phase_duration)
             # Left legs
             if not this_servo_params[2]:
-                left_servo_target_angle = get_left_leg_angle(knee_target_position_phase[set_a_phase], knee_center)
-                return calculate_curve(knee_smooth_phase[set_a_phase], this_servo_current_position, left_servo_target_angle, phase_duration)
+                return calculate_curve(knee_smooth_phase[set_a_phase], this_servo_current_position, knee_target_position_phase[set_a_phase], phase_duration)
 
         # Set B
         if not this_servo_params[1]:
@@ -62,8 +61,7 @@ def generate_servo_movement_curve(this_servo_current_position,
                 return calculate_curve(knee_smooth_phase[set_b_phase], this_servo_current_position, knee_target_position_phase[set_b_phase], phase_duration)
             # Left Legs
             if not this_servo_params[2]:
-                left_servo_target_angle = get_left_leg_angle(knee_target_position_phase[set_b_phase], knee_center)
-                return calculate_curve(knee_smooth_phase[set_b_phase], this_servo_current_position, left_servo_target_angle, phase_duration)
+                return calculate_curve(knee_smooth_phase[set_b_phase], this_servo_current_position, knee_target_position_phase[set_b_phase], phase_duration)
 
 
 def calculate_curve(curve_type, start_angle, end_angle, duration):
