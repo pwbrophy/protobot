@@ -183,9 +183,17 @@ def turn_on_robot_locomotion():
                     servo_params_for_turning = servo_params[servo]
                     # Right hips
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
+                        if servo == 1:
+                            print("this servo is moving to ",angle_for_this_servo," and the center is ", hip_center)
                         offset = angle_for_this_servo - hip_center
+                        if servo == 1:
+                            print("offset is", offset)
                         offset = offset*(-1)
+                        if servo == 1:
+                            print("multiplied offset is ", offset)
                         angle_for_this_servo = hip_center + offset
+                        if servo == 1:
+                            print("final angle for servo is ",angle_for_this_servo)
                     # Left hips
                     #if servo_params_for_turning[0] and not servo_params_for_turning[2]:
                     #    offset = angle_for_this_servo - hip_center
