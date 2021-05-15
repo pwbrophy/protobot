@@ -1,8 +1,6 @@
 from adafruit_servokit import ServoKit
 import time
 
-
-from easing_functions import *
 import numpy as np
 
 import robot_leg_functions
@@ -56,10 +54,6 @@ class MyApp(App):
         self.svg0 = svg0
         return self.svg0
 
-    def my_intensive_long_time_algorithm(self):
-        print("Turn on robot walking function")
-        turn_on_robot_locomotion()
-
     def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = True
@@ -72,6 +66,7 @@ class MyApp(App):
 def on_close(self):
     self.thread_alive_flag = False
     super(MyApp, self).on_close()
+
 
 def turn_on_robot_locomotion():
 
@@ -91,13 +86,6 @@ def turn_on_robot_locomotion():
     knee_up = 40
     knee_down = 90
 
-    # Initialise the starting positions for the hips
-    hip_current_angle_a = hip_center
-    hip_current_angle_b = hip_center
-
-    knee_current_angle_a = knee_center
-    knee_current_angle_b = knee_center
-
     # Center the legs
     robot_leg_functions.center_servos(hip_center, knee_center, kit)
 
@@ -107,49 +95,74 @@ def turn_on_robot_locomotion():
     # Phases
     phase_duration = 0.3
     number_of_phases = 4
+    phase = 0
 
-    # Walk forwads gait
+    # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
 
-    hip_set_a = [0, 2, 4]
-    hip_set_b = [1, 3, 5]
-    knee_set_a = [6, 8, 10]
-    knee_set_b = [7, 9, 11]
+    # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear
+    walk_forwards_hip_smooth = [1, 2, 1, 2]
+    walk_forwards_knee_smooth = [0, 0, 0, 0]
 
-    right_hips = [0, 1, 2]
-    left_hips = [3, 4, 5]
+    # Set each servo parameters
+    servo_params = []
+
+    for servo in range(0, number_of_servos):
+        servo_params.append(0)
+
+    # Hip = True /// Set A = True /// Right = True
+    servo_params[0] = [True, True, True]
+    servo_params[1] = [True, False, True]
+    servo_params[2] = [True, True, True]
+    servo_params[3] = [True, False, False]
+    servo_params[4] = [True, True, False]
+    servo_params[5] = [True, False, False]
+    servo_params[6] = [False, True, True]
+    servo_params[7] = [False, False, True]
+    servo_params[8] = [False, True, True]
+    servo_params[9] = [False, False, False]
+    servo_params[10] = [False, True, False]
+    servo_params[11] = [False, False, False]
+
+    servo_current_position = []
+
+    # Set the starting angle for all of the hips
+    for hip in range(0, 6):
+        servo_current_position[hip] = hip_center
+
+    # Set the starting angle for all of the knees
+    for knee in range(6, 12):
+        servo_current_position[knee] = knee_center
+
+    # Initialise our array which stores the servo curves
+    servo_curves = []
 
     print("Starting our loop!")
     while True:
         if robot_is_walking:
 
-            # Reset our timer
+            # Set our timer for the first loop
             phase_start_time = time.time()
 
-            for phase in range(number_of_phases):
+            while True:
 
-                # Generate smooth curves for 'set A' of legs
-                hip_curve_a = LinearInOut(start=hip_current_angle_a, end=walk_forwards_hip_phase_order[phase],
-                                          duration=phase_duration)
-                knee_curve_a = CubicEaseInOut(start=knee_current_angle_a, end=walk_forwards_knee_phase_order[phase],
-                                              duration=phase_duration)
-
-                # Advance the phase by 2 for the alternate legs
-                phase_b = phase + 2
-                # Loop the phase back if the phase is greater than the number of phases
-                if phase_b > number_of_phases - 1:
-                    phase_b = phase_b - 4
-
-                # Generate smooth curves for 'set B' of legs
-
-                hip_curve_b = LinearInOut(start=hip_current_angle_b, end=walk_forwards_hip_phase_order[phase_b],
-                                          duration=phase_duration)
-                knee_curve_b = CubicEaseInOut(start=knee_current_angle_b, end=walk_forwards_knee_phase_order[phase_b],
-                                              duration=phase_duration)
-
-                # hip_curve = CubicEaseInOut(start=hip_current_angle, end=walk_forwards_hip_phase_order[phase], duration=phase_duration)
-                # knee_curve = CubicEaseInOut(start=knee_current_angle, end=walk_forwards_knee_phase_order[phase], duration=phase_duration)
+                # Generate curve for each servo
+                for servo in range(0, number_of_servos):
+                    this_servo_current_position = servo_current_position[servo]
+                    this_servo_params = servo_params[servo]
+                    # servo number | start position | servo parameters | phase
+                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(servo,
+                                                                                            this_servo_current_position,
+                                                                                            this_servo_params,
+                                                                                            phase,
+                                                                                            walk_forwards_hip_phase_order,
+                                                                                            walk_forwards_hip_smooth,
+                                                                                            walk_forwards_knee_phase_order,
+                                                                                            walk_forwards_knee_smooth,
+                                                                                            phase_duration,
+                                                                                            hip_center,
+                                                                                            knee_center)
 
                 while True:
 
@@ -159,51 +172,28 @@ def turn_on_robot_locomotion():
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
 
-                    # Go through each hip in set A
-                    for servo in hip_set_a:
+                    # Go through each servo
+                    for servo in range(0, number_of_servos):
 
                         # Calculate how much we need to move based on time
-                        angle_for_this_servo = hip_curve_a.ease(current_time_from_zero)
+                        angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
 
-                        # If it's a left hip then flip the angle
-                        if servo in left_hips:
-                            hip_offset = angle_for_this_servo - hip_center
-                            angle_for_this_servo = hip_center - hip_offset
-
-                        # Move the hip
+                        # Move the servo
                         kit.servo[servo].angle = angle_for_this_servo
 
-                    for servo in hip_set_b:
-                        # Calculate how much we need to move based on time
-                        angle_for_this_servo = hip_curve_b.ease(current_time_from_zero)
-
-                        # If it's a left hip then flip the angle
-                        if servo in left_hips:
-                            hip_offset = angle_for_this_servo - hip_center
-                            angle_for_this_servo = hip_center - hip_offset
-
-                        # Move the hip
-                        kit.servo[servo].angle = angle_for_this_servo
-
-                    # Calculate and move the knees
-                    for servo in knee_set_a:
-                        angle_for_this_servo = knee_curve_a.ease(current_time_from_zero)
-                        kit.servo[servo].angle = angle_for_this_servo
-                    for servo in knee_set_b:
-                        angle_for_this_servo = knee_curve_b.ease(current_time_from_zero)
-                        kit.servo[servo].angle = angle_for_this_servo
+                        # Set the current angle to the target angle for each servo
+                        servo_current_position[servo] = angle_for_this_servo
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero or not robot_is_walking:
-                        # Set the current angle to the target angle for each sevo type
-                        hip_current_angle_a = walk_forwards_hip_phase_order[phase]
-                        hip_current_angle_b = walk_forwards_hip_phase_order[phase_b]
-                        knee_current_angle_a = walk_forwards_knee_phase_order[phase]
-                        knee_current_angle_b = walk_forwards_knee_phase_order[phase_b]
 
                         # Reset the timer
                         phase_start_time = time.time()
 
+                        # Move to the next phase
+                        phase += 1
+                        phase = phase % 4
+                        print(phase)
                         # Break out and go to the next phase
                         break
 
