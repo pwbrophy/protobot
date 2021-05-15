@@ -178,30 +178,23 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
+                    angle_with_turning_multiplier = angle_for_this_servo
+                    servo_params_for_turning = servo_params[servo]
 
                     # Apply turning multiplier
-                    servo_params_for_turning = servo_params[servo]
                     # Right hips
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
-                        if servo == 1:
-                            print("this servo is moving to ",angle_for_this_servo," and the center is ", hip_center)
                         offset = angle_for_this_servo - hip_center
-                        if servo == 1:
-                            print("offset is", offset)
                         offset = offset*(-1)
-                        if servo == 1:
-                            print("multiplied offset is ", offset)
-                        angle_for_this_servo = hip_center + offset
-                        if servo == 1:
-                            print("final angle for servo is ",angle_for_this_servo)
+                        angle_with_turning_multiplier = hip_center + offset
                     # Left hips
-                    #if servo_params_for_turning[0] and not servo_params_for_turning[2]:
-                    #    offset = angle_for_this_servo - hip_center
-                    #    #offset = offset*(1)
-                    #    angle_for_this_servo = hip_center + offset
+                    if servo_params_for_turning[0] and not servo_params_for_turning[2]:
+                        offset = angle_for_this_servo - hip_center
+                        offset = offset*(1)
+                        angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
-                    kit.servo[servo].angle = angle_for_this_servo
+                    kit.servo[servo].angle = angle_with_turning_multiplier
 
                     # Record the current angle for each servo
                     servo_current_position[servo] = angle_for_this_servo
