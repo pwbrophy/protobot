@@ -19,7 +19,6 @@ def generate_servo_movement_curve(this_servo_current_position,
                                   hip_center,
                                   knee_center):
 
-knee_center)
     set_a_phase = phase
     set_b_phase = (phase + 2) % 4
 
