@@ -65,11 +65,11 @@ class MyApp(App):
 
     def update_movement(self, emitter, x, y):
         x_pos = float(x)
-        y_pos = float(y)
+        #  y_pos = float(y)
         if x_pos > 0.0 and x_pos < 200:
             print("x = ", x_pos)
-        if y_pos > 0.0 and y_pos < 200:
-            print("y = ", y_pos)
+        # if y_pos > 0.0 and y_pos < 200:
+        #    print("y = ", y_pos)
         # z = x - 50
         # a = z / 50
         # print(a)
