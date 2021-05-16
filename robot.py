@@ -213,12 +213,16 @@ def turn_on_robot_locomotion():
                     servo_params_for_turning = servo_params[servo]
 
                     # Apply turning multiplier
+
                     # Right hips
                     global turning_speed
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        if turning_speed > 0:
+                        if turning_speed > 0:  # If we are turning right, slow down the right servos
+                            print("TURNING RIGHT!!!")
+                            print("turning speed is", turning_speed)
                             right_turn_speed = (turning_speed - 0.5)*2
+                            print("right turn speed is ", right_turn_speed)
                             offset = offset * right_turn_speed
                         angle_with_turning_multiplier = hip_center + offset
 
