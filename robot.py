@@ -15,6 +15,13 @@ import threading
 global robot_is_walking
 robot_is_walking = False
 
+# Turning speed
+global turning_speed
+turning_speed = 0
+
+
+
+
 class MyApp(App):
     def __init__(self, *args):
         super(MyApp, self).__init__(*args)
@@ -56,6 +63,7 @@ class MyApp(App):
         return self.svg0
 
     def walk_forwards_begin(self, emitter, x, y):
+        self.update_turning(x, y)
         global robot_is_walking
         robot_is_walking = True
 
@@ -64,12 +72,20 @@ class MyApp(App):
         robot_is_walking = False
 
     def update_movement(self, emitter, x, y):
-        x_pos = float(x)
+        self.update_turning(x, y)
         # print("xpos is", x_pos)
+
+    def update_turning(self, x, y):
+        x_pos = float(x)
+
+        global turning_speed
+
         if x_pos > 0.0 and x_pos < 200:
             x_pos = x_pos - 100
             x_pos = x_pos / 100
             print(x_pos)
+
+            turning_speed = x_pos
         #global input_move_x
         #input_move_x = a
         #global input_move_y
@@ -86,6 +102,7 @@ def turn_on_robot_locomotion():
     kit = ServoKit(channels=16)
 
     number_of_servos = 12
+
     global robot_is_walking
     robot_is_walking = False
 
@@ -198,18 +215,21 @@ def turn_on_robot_locomotion():
 
                     # Apply turning multiplier
                     # Right hips
+                    global turning_speed
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        offset = offset*(-1)
+                        if turning_speed < 0:
+                            offset = offset*turning_speed
                         angle_with_turning_multiplier = hip_center + offset
                     # Left hips
                     if servo_params_for_turning[0] and not servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        offset = offset*(1)
+                        if turning_speed > 0:
+                            offset = offset*(-turning_speed)
                         angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
-                    # kit.servo[servo].angle = angle_with_turning_multiplier
+                    kit.servo[servo].angle = angle_with_turning_multiplier
 
                     # Record the current angle for each servo
                     servo_current_position[servo] = angle_for_this_servo
