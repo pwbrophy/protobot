@@ -218,16 +218,16 @@ def turn_on_robot_locomotion():
                     global turning_speed
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        if turning_speed < 0:
-                            right_turn_speed = (turning_speed + 0.5)*2
+                        if turning_speed > 0:
+                            right_turn_speed = (turning_speed - 0.5)*2
                             offset = offset * right_turn_speed
                         angle_with_turning_multiplier = hip_center + offset
 
                     # Left hips
                     if servo_params_for_turning[0] and not servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        if turning_speed > 0:
-                            left_turn_speed = (turning_speed - 0.5)*2
+                        if turning_speed < 0:
+                            left_turn_speed = (turning_speed + 0.5)*2
                             offset = offset * left_turn_speed
                         angle_with_turning_multiplier = hip_center + offset
 
