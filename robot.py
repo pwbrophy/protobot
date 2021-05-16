@@ -35,7 +35,7 @@ class MyApp(App):
         svgcircle0.attr_cy = 120.0
         svgcircle0.attr_editor_newclass = False
         svgcircle0.attr_fill = "rgb(200,200,200)"
-        svgcircle0.attr_r = "90.0"
+        svgcircle0.attr_r = "100.0"
         svgcircle0.attr_stroke = "rgb(0,0,0)"
         svgcircle0.css_left = "190.875px"
         svgcircle0.css_top = "165.90625px"
@@ -43,6 +43,7 @@ class MyApp(App):
         svg0.append(svgcircle0,'svgcircle0')
         svg0.ontouchstart.do(self.walk_forwards_begin)
         svg0.ontouchend.do(self.walk_forwards_end)
+        svg0.ontouchmove.do(self.update_movement)
 
         self.thread_alive_flag = True
         self.my_thread_result = 0
@@ -57,11 +58,19 @@ class MyApp(App):
     def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = True
-        print(x, y)
 
     def walk_forwards_end(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = False
+
+    def update_movement(self, emitter, x,y):
+        global input_move_x
+        x = x - 50
+        x = x / 50
+        print(x)
+        input_move_x = x
+        global input_move_y
+        input_move_y = y
 
 
 def on_close(self):
@@ -148,7 +157,7 @@ def turn_on_robot_locomotion():
     while True:
         if robot_is_walking:
             # Set our timer for the first loop
-            print(phase)
+
             phase_start_time = time.time()
 
             for servo in range(0, number_of_servos):  # Generate curve for each servo
@@ -203,7 +212,7 @@ def turn_on_robot_locomotion():
                     servo_current_position[servo] = angle_for_this_servo
 
                 # When the phase ends
-                if phase_duration < current_time_from_zero or not robot_is_walking:
+                if phase_duration < current_time_from_zero:
 
                     # Reset the timer
                     phase_start_time = time.time()
@@ -213,6 +222,11 @@ def turn_on_robot_locomotion():
                     phase = phase % 4
 
                     # Break out and go to the next phase
+                    break
+
+                if not robot_is_walking:
+                    # Reset the phase timer
+                    phase_start_time = time.time()
                     break
 
 # starts the web server
