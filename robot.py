@@ -67,9 +67,8 @@ class MyApp(App):
         x_pos = float(x)
 
         if x_pos > 0.0 and x_pos < 200:
-            print("x = ", x_pos)
-            x_pos = x_pos - 50
-            x_pos = x_pos / 50
+            x_pos = x_pos - 100
+            x_pos = x_pos / 100
             print(x_pos)
         #global input_move_x
         #input_move_x = a
@@ -210,7 +209,7 @@ def turn_on_robot_locomotion():
                         angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
-                    kit.servo[servo].angle = angle_with_turning_multiplier
+                    # kit.servo[servo].angle = angle_with_turning_multiplier
 
                     # Record the current angle for each servo
                     servo_current_position[servo] = angle_for_this_servo
