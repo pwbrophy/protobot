@@ -68,10 +68,10 @@ class MyApp(App):
         # z = x - 50
         # a = z / 50
         # print(a)
-        global input_move_x
-        input_move_x = a
-        global input_move_y
-        input_move_y = y
+        #global input_move_x
+        #input_move_x = a
+        #global input_move_y
+        #input_move_y = y
 
 
 def on_close(self):
