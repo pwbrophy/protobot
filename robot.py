@@ -57,6 +57,7 @@ class MyApp(App):
     def walk_forwards_begin(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = True
+        print(x, y)
 
     def walk_forwards_end(self, emitter, x, y):
         global robot_is_walking
@@ -147,6 +148,7 @@ def turn_on_robot_locomotion():
     while True:
         if robot_is_walking:
             # Set our timer for the first loop
+            print(phase)
             phase_start_time = time.time()
 
             for servo in range(0, number_of_servos):  # Generate curve for each servo
