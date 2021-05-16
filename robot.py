@@ -149,8 +149,8 @@ def turn_on_robot_locomotion():
             # Set our timer for the first loop
             phase_start_time = time.time()
 
-            # Generate curve for each servo
-            for servo in range(0, number_of_servos):
+            for servo in range(0, number_of_servos):  # Generate curve for each servo
+
                 this_servo_current_position = servo_current_position[servo]
                 this_servo_params = servo_params[servo]
                 # servo number | start position | servo parameters | phase
@@ -166,7 +166,8 @@ def turn_on_robot_locomotion():
                                                                                         knee_center
                                                                                         )
 
-            while True:
+            while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
+
                 # Sleep a bit so that we don't hammer the processor
                 time.sleep(0.005)
 
@@ -185,7 +186,7 @@ def turn_on_robot_locomotion():
                     # Right hips
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
                         offset = angle_for_this_servo - hip_center
-                        offset = offset*(-1)
+                        offset = offset*(1)
                         angle_with_turning_multiplier = hip_center + offset
                     # Left hips
                     if servo_params_for_turning[0] and not servo_params_for_turning[2]:
