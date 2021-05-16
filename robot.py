@@ -63,12 +63,13 @@ class MyApp(App):
         global robot_is_walking
         robot_is_walking = False
 
-    def update_movement(self, emitter, x,y):
+    def update_movement(self, emitter, x, y):
+
+        z = x - 50
+        a = z / 50
+        print(a)
         global input_move_x
-        x = x - 50
-        x = x / 50
-        print(x)
-        input_move_x = x
+        input_move_x = a
         global input_move_y
         input_move_y = y
 
