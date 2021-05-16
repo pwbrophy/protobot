@@ -83,7 +83,6 @@ class MyApp(App):
         if x_pos > 0.0 and x_pos < 200:
             x_pos = x_pos - 100
             x_pos = x_pos / 100
-            print(x_pos)
 
             turning_speed = x_pos
         #global input_move_x
@@ -228,7 +227,7 @@ def turn_on_robot_locomotion():
                         offset = angle_for_this_servo - hip_center
                         if turning_speed < 0:
                             left_turn_speed = (turning_speed + 0.5)*2
-                            offset = offset * left_turn_speed
+                            offset = offset * -left_turn_speed
                         angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
