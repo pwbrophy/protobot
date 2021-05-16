@@ -64,10 +64,10 @@ class MyApp(App):
         robot_is_walking = False
 
     def update_movement(self, emitter, x, y):
-
-        z = x - 50
-        a = z / 50
-        print(a)
+        print("x =", x," y= ",y)
+        # z = x - 50
+        # a = z / 50
+        # print(a)
         global input_move_x
         input_move_x = a
         global input_move_y
