@@ -68,7 +68,7 @@ class MyApp(App):
 
         if x_pos > 0.0 and x_pos < 200:
             print("x = ", x_pos)
-            x_pos = x - 50
+            x_pos = x_pos - 50
             x_pos = x_pos / 50
             print(x_pos)
         #global input_move_x
