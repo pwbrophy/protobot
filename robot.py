@@ -64,9 +64,9 @@ class MyApp(App):
         robot_is_walking = False
 
     def update_movement(self, emitter, x, y):
-        if x > 0 and x < self.svgcircle0.attr_r * 2:
+        if x > 0.0 and x < self.svgcircle0.attr_r * 2:
             print("x = ", x)
-        if y > 0 and y < self.svgcircle0.attr_r * 2:
+        if y > 0.0 and y < self.svgcircle0.attr_r * 2:
             print("y = ", y)
         # z = x - 50
         # a = z / 50
