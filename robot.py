@@ -173,6 +173,8 @@ def turn_on_robot_locomotion():
     for servo in range(0, number_of_servos):
         servo_curves.append(0)
 
+    turning_speed_smooth = 0
+
     print("Starting our loop!")
     while True:
         if robot_is_walking:
