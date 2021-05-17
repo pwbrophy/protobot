@@ -223,7 +223,7 @@ def turn_on_robot_locomotion():
 
                     # Smooth the turning speed
                     turning_speed_smooth_curve = LinearInOut(start=turning_speed_smooth, end=turning_speed, duration=1)
-                    turning_speed_smooth = turning_speed_smooth_curve.ease(0.001)
+                    turning_speed_smooth = turning_speed_smooth_curve.ease(0.01)
 
                     # Right hips
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
