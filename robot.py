@@ -289,31 +289,37 @@ def turn_on_robot_locomotion():
             # Set our timer for the first loop
             phase_start_time = time.time()
             print("Robot is now stopping, phase is ", phase)
+
+            current_walking_phase = phase
+            phase = 1
+
             # Check which phase we're in and which legs are up or down
-            if phase == 1 or phase == 4:
+            if current_walking_phase == 1 or phase == 4:
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
-            if phase == 2 or phase == 3:
+            if current_walking_phase == 2 or phase == 3:
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-                # Legs which are raised
-            if servo_params[servo][LegsWhichAreUp]:
-                hip_phase_order = stop_raised_hip_phase_order
-                hip_smooth = stop_raised_hip_smooth
-                knee_phase_order = stop_raised_knee_phase_order
-                knee_smooth = stop_raised_knee_smooth
 
-                # Legs which are down
-            if servo_params[servo][LegsWhichAreDown]:
-                hip_phase_order = stop_down_hip_phase_order
-                hip_smooth = stop_down_hip_smooth
-                knee_phase_order = stop_down_knee_phase_order
-                knee_smooth = stop_down_knee_smooth
 
             for phase in range (1,5):
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
+
+                    # Legs which are raised
+                    if servo_params[servo][LegsWhichAreUp]:
+                        hip_phase_order = stop_raised_hip_phase_order
+                        hip_smooth = stop_raised_hip_smooth
+                        knee_phase_order = stop_raised_knee_phase_order
+                        knee_smooth = stop_raised_knee_smooth
+
+                    # Legs which are down
+                    if servo_params[servo][LegsWhichAreDown]:
+                        hip_phase_order = stop_down_hip_phase_order
+                        hip_smooth = stop_down_hip_smooth
+                        knee_phase_order = stop_down_knee_phase_order
+                        knee_smooth = stop_down_knee_smooth
 
                     this_servo_current_position = servo_current_position[servo]
                     this_servo_params = servo_params[servo]
