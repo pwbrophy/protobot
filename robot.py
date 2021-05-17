@@ -288,7 +288,7 @@ def turn_on_robot_locomotion():
         if robot_is_stopping:
             # Set our timer for the first loop
             phase_start_time = time.time()
-
+            print("Robot is now stopping, phase is ", phase)
             # Check which phase we're in and which legs are up or down
             if phase == 1 or phase == 4:
                 LegsWhichAreUp = True
