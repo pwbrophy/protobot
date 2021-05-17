@@ -262,6 +262,10 @@ def turn_on_robot_locomotion():
                 if not robot_is_walking:
                     # Reset the phase timer
                     phase_start_time = time.time()
+
+                    # Shut down all the servos
+                    for servo in range(0, number_of_servos):
+                        kit.servo[servo].angle = None
                     break
 
 # starts the web server
