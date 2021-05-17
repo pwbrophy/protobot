@@ -1,5 +1,6 @@
 from adafruit_servokit import ServoKit
 from easing_functions import *
+from datetime import timedelta
 import time
 import numpy as np
 import robot_leg_functions
@@ -8,16 +9,12 @@ from remi import start, App
 
 import threading
 
-
-# Walking state
 global robot_is_walking
 robot_is_walking = False
 
-# Turning speed
 global turning_speed
 turning_speed = 0
 
-# Moving speed
 global moving_speed
 moving_speed = 0
 
@@ -110,9 +107,9 @@ def turn_on_robot_locomotion():
     hip_backwards = 120
 
     # Define knee positions
-    knee_center = 100
+    knee_center = 85
     knee_up = 40
-    knee_down = 120
+    knee_down = 100
 
     # Center the legs
     robot_leg_functions.center_servos(hip_center, knee_center, kit)
