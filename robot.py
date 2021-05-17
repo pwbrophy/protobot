@@ -131,6 +131,20 @@ def turn_on_robot_locomotion():
     walk_forwards_hip_smooth = [2, 1, 2, 1]
     walk_forwards_knee_smooth = [0, 0, 0, 0]
 
+    # Stopping gait raised leg
+    stop_raised_hip_phase_order = [hip_center, hip_center, hip_center, hip_center]
+    stop_raised_knee_phase_order = [knee_up, knee_center, knee_center, knee_center]
+    # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
+    stop_raised_hip_smooth = [0, 0, 0, 0]
+    stop_raised_knee_smooth = [0, 0, 0, 0]
+
+    # Stopping gait down leg
+    stop_down_hip_phase_order = [-1, -1, -1, hip_center]
+    stop_down_knee_phase_order = [-1, -1, knee_up, knee_center]
+    # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
+    stop_down_hip_smooth = [0, 0, 0, 0]
+    stop_down_knee_smooth = [0, 0, 0, 0]
+
     # Set each servo parameters
     servo_params = []
 
@@ -212,7 +226,7 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
-                    angle_with_turning_multiplier = angle_for_this_servo
+                    # angle_with_turning_multiplier = angle_for_this_servo
                     servo_params_for_turning = servo_params[servo]
 
                     # Apply turning multiplier
@@ -264,10 +278,91 @@ def turn_on_robot_locomotion():
                     # Reset the phase timer
                     phase_start_time = time.time()
 
-                    # Shut down all the servos
-                    for servo in range(0, number_of_servos):
-                        kit.servo[servo].angle = None
+                    # Stop the robot
+                    robot_is_stopping = True
+
                     break
+
+        if robot_is_stopping:
+            # Set our timer for the first loop
+            phase_start_time = time.time()
+
+            # Check which phase we're in and which legs are up or down
+            if phase == 1 or phase == 4:
+                LegsWhichAreUp = True
+                LegsWhichAreDown = False
+
+            if phase == 2 or phase == 3:
+                LegsWhichAreUp = False
+                LegsWhichAreDown = True
+
+                # Legs which are raised
+            if servo_params[servo][LegsWhichAreUp]:
+                hip_phase_order = stop_raised_hip_phase_order
+                hip_smooth = stop_raised_hip_smooth
+                knee_phase_order = stop_raised_knee_phase_order
+                knee_smooth = stop_raised_knee_smooth
+
+                # Legs which are down
+            if servo_params[servo][LegsWhichAreDown]:
+                hip_phase_order = stop_down_hip_phase_order
+                hip_smooth = stop_down_hip_smooth
+                knee_phase_order = stop_down_knee_phase_order
+                knee_smooth = stop_down_knee_smooth
+
+            for phase in range (1,5):
+                for servo in range(0, number_of_servos):  # Generate curve for each servo
+
+                    this_servo_current_position = servo_current_position[servo]
+                    this_servo_params = servo_params[servo]
+
+                    # servo number | start position | servo parameters | phase
+                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
+                                                                                            this_servo_params,
+                                                                                            phase,
+                                                                                            hip_phase_order,
+                                                                                            hip_smooth,
+                                                                                            knee_phase_order,
+                                                                                            knee_smooth,
+                                                                                            phase_duration_min,
+                                                                                            hip_center,
+                                                                                            knee_center
+                                                                                            )
+
+                while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
+
+                    # Sleep a bit so that we don't hammer the processor
+                    time.sleep(0.005)
+
+                    # Start a timer for the phase
+                    current_time_from_zero = time.time() - phase_start_time
+
+                    # Go through each servo
+                    for servo in range(0, number_of_servos):
+
+                        # Calculate how much we need to move based on time
+                        angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
+                        # Move the servo
+                        kit.servo[servo].angle = angle_with_turning_multiplier
+
+                        # Record the current angle for each servo
+                        servo_current_position[servo] = angle_for_this_servo
+
+                    # When the phase ends
+                    if phase_duration < current_time_from_zero:
+
+                        # Reset the timer
+                        phase_start_time = time.time()
+
+                        # Move to the next phase
+                        phase += 1
+
+                        if phase == 4:
+                            robot_is_stopping = False
+
+                            for servo in range(0, number_of_servos):
+                                kit.servo[servo].angle = None
+                        break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
