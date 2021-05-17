@@ -19,8 +19,9 @@ robot_is_walking = False
 global turning_speed
 turning_speed = 0
 
-
-
+# Moving speed
+global moving_speed
+moving_speed = 0
 
 class MyApp(App):
     def __init__(self, *args):
@@ -77,19 +78,19 @@ class MyApp(App):
 
     def update_turning(self, x, y):
         x_pos = float(x)
+        y_pos = float(y)
 
         global turning_speed
+        global moving_speed
 
-        if x_pos > 0.0 and x_pos < 200:
+        if 0.0 < x_pos < 200:
             x_pos = x_pos - 100
             x_pos = x_pos / 100
-
             turning_speed = x_pos
-        #global input_move_x
-        #input_move_x = a
-        #global input_move_y
-        #input_move_y = y
 
+        if 0.0 < y_pos < 200:
+            y_pos = y_pos / 200
+            moving_speed = y_pos
 
 def on_close(self):
     self.thread_alive_flag = False
@@ -122,7 +123,9 @@ def turn_on_robot_locomotion():
     time.sleep(2)
 
     # Phases
-    phase_duration = 0.15
+    phase_duration = 0.5
+    phase_duration_max = 0.8
+    phase_duration_min = 0.2
     number_of_phases = 4
     phase = 0
 
@@ -176,8 +179,11 @@ def turn_on_robot_locomotion():
     while True:
         if robot_is_walking:
             # Set our timer for the first loop
-
             phase_start_time = time.time()
+
+            # Calculate the phase duration based on input
+            phase_range = phase_duration_max - phase_duration_min
+            phase_duration = (moving_speed * phase_range) + phase_duration_min
 
             for servo in range(0, number_of_servos):  # Generate curve for each servo
 
@@ -217,12 +223,12 @@ def turn_on_robot_locomotion():
                     # Right hips
                     global turning_speed
                     if servo_params_for_turning[0] and servo_params_for_turning[2]:
+                        # Get the offset from the center position
                         offset = angle_for_this_servo - hip_center
                         if turning_speed > 0:  # If we are turning right, slow down the right servos
-                            # print("TURNING RIGHT!!!")
-                            # print("turning speed is", turning_speed)
+                            # Map the range 0 to +1 to the range +1 to -1
                             right_turn_speed = (turning_speed - 0.5)*-2
-                            # print("right turn speed is ", right_turn_speed)
+                            # Multiply the offset by the input
                             offset = offset * right_turn_speed
                         angle_with_turning_multiplier = hip_center + offset
 
