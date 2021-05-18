@@ -193,19 +193,13 @@ def turn_on_robot_locomotion():
         if robot_is_walking:
             # Set our timer for the first loop
             phase_start_time = time.time()
-            print("Phase = ", phase)
+            print("WALKING - Phase = ", phase)
             # Calculate the phase duration based on input
             phase_range = phase_duration_max - phase_duration_min
             phase_duration = (moving_speed * phase_range) + phase_duration_min
 
             for servo in range(0, number_of_servos):  # Generate curve for each servo
-                if servo == 6:
-                    print()
-                    print("Ok so we are generating the servo curve for servo 6, phase is ", phase)
                 this_servo_current_position = servo_current_position[servo]
-                if servo == 6:
-                    print("servo is currently at ", this_servo_current_position)
-                    print("curve is moving to ", walk_forwards_knee_phase_order[phase])
                 this_servo_params = servo_params[servo]
                 # servo number | start position | servo parameters | phase
                 print("Generating walking curve for servo #", servo)
@@ -279,7 +273,6 @@ def turn_on_robot_locomotion():
                     print("Phase ",  phase, " ended")
                     phase += 1
                     phase = phase % 4
-                    print()
                     print("Phase incremented, now starting ", phase)
                     # Break out and go to the next phase
                     break
