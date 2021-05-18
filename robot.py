@@ -208,7 +208,7 @@ def turn_on_robot_locomotion():
                     print("curve is moving to ", walk_forwards_knee_phase_order[phase])
                 this_servo_params = servo_params[servo]
                 # servo number | start position | servo parameters | phase
-                print("Generating walking curve for servo #", servo )
+                print("Generating walking curve for servo #", servo)
                 servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
                                                                                         this_servo_params,
                                                                                         phase,
