@@ -124,7 +124,7 @@ def turn_on_robot_locomotion():
     phase_duration_max = 0.8
     phase_duration_min = 0.2
     number_of_phases = 4
-    phase = 0
+    phase = 1
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
@@ -307,7 +307,7 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-            for phase in range (1,5):
+            for phase in range(1, 5):
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
 
                     # Legs which are raised
