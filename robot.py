@@ -214,7 +214,7 @@ def turn_on_robot_locomotion():
                                                                                         hip_center,
                                                                                         knee_center
                                                                                         )
-
+                print("Generating walking curve for servo #", servo, " target position = ", servo_curves[servo].ease(phase_duration))
             while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                 # Sleep a bit so that we don't hammer the processor
