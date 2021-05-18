@@ -276,9 +276,11 @@ def turn_on_robot_locomotion():
                     phase_start_time = time.time()
 
                     # Move to the next phase
+                    print("Phase ",  phase, " ended")
                     phase += 1
                     phase = phase % 4
-
+                    print()
+                    print("Phase incremented, now starting ", phase)
                     # Break out and go to the next phase
                     break
 
