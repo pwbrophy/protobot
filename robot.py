@@ -304,7 +304,7 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-            for phase in range(0, 4):  # Cycle through each phase
+            while True:  # Cycle through each phase
                 print("Robot stopping phase ", phase)
                 phase_start_time = time.time()  # Restart the phase timer
 
