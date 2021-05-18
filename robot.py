@@ -331,7 +331,7 @@ def turn_on_robot_locomotion():
                                                                                             hip_smooth,
                                                                                             knee_phase_order,
                                                                                             knee_smooth,
-                                                                                            phase_duration_min,
+                                                                                            1,
                                                                                             hip_center,
                                                                                             knee_center
                                                                                             )
