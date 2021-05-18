@@ -370,11 +370,11 @@ def turn_on_robot_locomotion():
                             phase += 1
 
                     if phase == 3:
-                           robot_is_stopping = False
-                           for servo in range(0, number_of_servos):
-                               kit.servo[servo].angle = None
-                           phase = 0
-                       break
+                        robot_is_stopping = False
+                        for servo in range(0, number_of_servos):
+                            kit.servo[servo].angle = None
+                        phase = 0
+                        break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
