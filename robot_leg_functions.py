@@ -22,7 +22,7 @@ def generate_servo_movement_curve(this_servo_current_position,
 
     set_a_phase = phase
     set_b_phase = (phase + 2) % 4
-
+    print("This servo is currently at", this_servo_current_position)
     print("Set A phase is",set_a_phase)
     print("Hip target position  is", hip_target_position_phase[set_a_phase])
     print("Knee target position  is", knee_target_position_phase[set_b_phase])
@@ -33,14 +33,14 @@ def generate_servo_movement_curve(this_servo_current_position,
     knee_target_position_a = knee_target_position_phase[set_a_phase]
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
-    #if hip_target_position_a == -1:
-    #    hip_target_position_a = this_servo_current_position
-    #if hip_target_position_b == -1:
-    #    hip_target_position_b = this_servo_current_position
-    #if knee_target_position_a == -1:
-    #    knee_target_position_a = this_servo_current_position
-    #if knee_target_position_b == -1:
-    #    knee_target_position_b = this_servo_current_position
+    if hip_target_position_a == -1:
+        hip_target_position_a = this_servo_current_position
+    if hip_target_position_b == -1:
+        hip_target_position_b = this_servo_current_position
+    if knee_target_position_a == -1:
+        knee_target_position_a = this_servo_current_position
+    if knee_target_position_b == -1:
+        knee_target_position_b = this_servo_current_position
 
     # Hips
     if this_servo_params[0]:
