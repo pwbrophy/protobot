@@ -335,7 +335,8 @@ def turn_on_robot_locomotion():
                                                                                             hip_center,
                                                                                             knee_center
                                                                                             )
-
+                    if servo == 11:
+                        print("STOPPING! Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
                 while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                     # Sleep a bit so that we don't hammer the processor
@@ -357,6 +358,8 @@ def turn_on_robot_locomotion():
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero:
+
+                        print(angle_for_this_servo)
 
                         # Reset the timer
                         phase_start_time = time.time()
