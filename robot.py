@@ -344,8 +344,8 @@ def turn_on_robot_locomotion():
                                                                                             hip_center,
                                                                                             knee_center
                                                                                             )
-                    if servo == 11:
-                        print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
+
+                    print("Servo ", servo", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
 
                 while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
