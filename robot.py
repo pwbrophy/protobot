@@ -304,8 +304,10 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-            for phase in range(0, 4):
-                phase_start_time = time.time()
+            for phase in range(0, 4):  # Cycle through each phase
+                print("Robot stopping phase ", phase)
+                phase_start_time = time.time()  # Restart the phase timer
+
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
 
                     # Legs which are raised
