@@ -203,6 +203,7 @@ def turn_on_robot_locomotion():
                     print()
                     print("Ok so we are generating the servo curve for servo 1, phase is ", phase)
                 this_servo_current_position = servo_current_position[servo]
+                if servo == 0:
                     print("servo is currently at ", this_servo_current_position)
                     print("curve is moving to ", walk_forwards_hip_phase_order[phase])
                 this_servo_params = servo_params[servo]
