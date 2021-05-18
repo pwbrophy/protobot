@@ -385,7 +385,7 @@ def turn_on_robot_locomotion():
                         break
 
                     if phase == 3:
-                        global robot_is_stopping
+
                         robot_is_stopping = False
 
                         for servo in range(0, number_of_servos):  # Turn off all the servos
