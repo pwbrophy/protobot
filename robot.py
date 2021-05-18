@@ -199,8 +199,12 @@ def turn_on_robot_locomotion():
             phase_duration = (moving_speed * phase_range) + phase_duration_min
 
             for servo in range(0, number_of_servos):  # Generate curve for each servo
-
+                if servo == 0:
+                    print()
+                    print("Ok so we are generating the servo curve for servo 1, phase is ", phase)
                 this_servo_current_position = servo_current_position[servo]
+                    print("servo is currently at ", this_servo_current_position)
+                    print("curve is moving to ", walk_forwards_hip_phase_order[phase])
                 this_servo_params = servo_params[servo]
                 # servo number | start position | servo parameters | phase
                 servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
