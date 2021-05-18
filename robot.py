@@ -366,25 +366,25 @@ def turn_on_robot_locomotion():
                         # Record the current angle for each servo
                         servo_current_position[servo] = angle_for_this_servo
 
-                    # When the phase ends
-                    if phase_duration < current_time_from_zero:
+                # When the phase ends
+                if phase_duration < current_time_from_zero:
 
-                        print(angle_for_this_servo)
+                    print(angle_for_this_servo)
 
-                        # Reset the timer
-                        phase_start_time = time.time()
+                    # Reset the timer
+                    phase_start_time = time.time()
 
-                        # Move to the next phase
-                        if phase < 4:
-                            phase += 1
-                            print("Phase is now", phase)
+                    # Move to the next phase
+                    if phase < 4:
+                        phase += 1
+                        print("Phase is now", phase)
 
-                    if phase == 3:
-                        robot_is_stopping = False
-                        for servo in range(0, number_of_servos):
-                            kit.servo[servo].angle = None
-                        phase = 0
-                        break
+                if phase == 3:
+                    robot_is_stopping = False
+                    for servo in range(0, number_of_servos):
+                        kit.servo[servo].angle = None
+                    phase = 0
+                    break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
