@@ -228,37 +228,37 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
-                    # angle_with_turning_multiplier = angle_for_this_servo
+                    angle_with_turning_multiplier = angle_for_this_servo
                     servo_params_for_turning = servo_params[servo]
 
                     # Apply turning multiplier
-                    #global turning_speed
+                    global turning_speed
 
-                    ## Smooth the turning speed
-                    #turning_speed_smooth_curve = LinearInOut(start=turning_speed_smooth, end=turning_speed, duration=1)
-                    #turning_speed_smooth = turning_speed_smooth_curve.ease(0.01)
+                    # Smooth the turning speed
+                    turning_speed_smooth_curve = LinearInOut(start=turning_speed_smooth, end=turning_speed, duration=1)
+                    turning_speed_smooth = turning_speed_smooth_curve.ease(0.01)
 
-                    ## Right hips
-                    #if servo_params_for_turning[0] and servo_params_for_turning[2]:
-                    #    # Get the offset from the center position
-                    #    offset = angle_for_this_servo - hip_center
-                    #    if turning_speed_smooth > 0:  # If we are turning right, slow down the right servos
-                    #        # Map the range 0 to +1 to the range +1 to -1
-                    #        right_turn_speed = (turning_speed_smooth - 0.5)*-2
-                    #        # Multiply the offset by the input
-                    #        offset = offset * right_turn_speed
-                    #    angle_with_turning_multiplier = hip_center + offset
+                    # Right hips
+                    if servo_params_for_turning[0] and servo_params_for_turning[2]:
+                        # Get the offset from the center position
+                        offset = angle_for_this_servo - hip_center
+                        if turning_speed_smooth > 0:  # If we are turning right, slow down the right servos
+                            # Map the range 0 to +1 to the range +1 to -1
+                            right_turn_speed = (turning_speed_smooth - 0.5)*-2
+                            # Multiply the offset by the input
+                            offset = offset * right_turn_speed
+                        angle_with_turning_multiplier = hip_center + offset
 #
-                    ## Left hips
-                    #if servo_params_for_turning[0] and not servo_params_for_turning[2]:
-                    #    offset = angle_for_this_servo - hip_center
-                    #    if turning_speed_smooth < 0:
-                    #        left_turn_speed = (turning_speed_smooth + 0.5)*-2
-                    #        offset = offset * -left_turn_speed
-                    #    angle_with_turning_multiplier = hip_center + offset
+                    # Left hips
+                    if servo_params_for_turning[0] and not servo_params_for_turning[2]:
+                        offset = angle_for_this_servo - hip_center
+                        if turning_speed_smooth < 0:
+                            left_turn_speed = (turning_speed_smooth + 0.5)*-2
+                            offset = offset * -left_turn_speed
+                        angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
-                    kit.servo[servo].angle = angle_for_this_servo
+                    kit.servo[servo].angle = angle_with_turning_multiplier
 
                     # Record the current angle for each servo
                     servo_current_position[servo] = angle_for_this_servo
