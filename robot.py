@@ -202,7 +202,6 @@ def turn_on_robot_locomotion():
                 this_servo_current_position = servo_current_position[servo]
                 this_servo_params = servo_params[servo]
                 # servo number | start position | servo parameters | phase
-                print("Generating walking curve for servo #", servo)
                 servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
                                                                                         this_servo_params,
                                                                                         phase,
@@ -214,7 +213,9 @@ def turn_on_robot_locomotion():
                                                                                         hip_center,
                                                                                         knee_center
                                                                                         )
-                print("Generating walking curve for servo #", servo, " target position = ", servo_curves[servo].ease(phase_duration))
+                if servo == 11:
+                    print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
+                    print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
             while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                 # Sleep a bit so that we don't hammer the processor
@@ -278,8 +279,6 @@ def turn_on_robot_locomotion():
                     break
 
                 if not robot_is_walking:
-                    # Reset the phase timer
-                    phase_start_time = time.time()
 
                     # Stop the robot
                     robot_is_stopping = True
