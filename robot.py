@@ -373,6 +373,8 @@ def turn_on_robot_locomotion():
 
                             for servo in range(0, number_of_servos):
                                 kit.servo[servo].angle = None
+
+                            phase = 0
                         break
 
 # starts the web server
