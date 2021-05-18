@@ -13,7 +13,7 @@ global robot_is_walking
 robot_is_walking = False
 
 global robot_is_stopping
-robot_is_walking = False
+robot_is_stopping = False
 
 global turning_speed
 turning_speed = 0
@@ -284,6 +284,7 @@ def turn_on_robot_locomotion():
                 if not robot_is_walking:
 
                     # Stop the robot
+                    global robot_is_stopping
                     robot_is_stopping = True
 
                     break
