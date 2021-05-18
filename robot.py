@@ -340,44 +340,45 @@ def turn_on_robot_locomotion():
                                                                                             knee_center
                                                                                             )
                     if servo == 11:
-                        print("STOPPING! Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
-                while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
+                        print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
 
-                    # Sleep a bit so that we don't hammer the processor
-                    time.sleep(0.005)
+                    while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
-                    # Start a timer for the phase
-                    current_time_from_zero = time.time() - phase_start_time
+                        # Sleep a bit so that we don't hammer the processor
+                        time.sleep(0.005)
 
-                    # Go through each servo
-                    for servo in range(0, number_of_servos):
+                        # Start a timer for the phase
+                        current_time_from_zero = time.time() - phase_start_time
 
-                        # Calculate how much we need to move based on time
-                        angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
-                        # Move the servo
-                        kit.servo[servo].angle = angle_for_this_servo
-
-                        # Record the current angle for each servo
-                        servo_current_position[servo] = angle_for_this_servo
-
-                    # When the phase ends
-                    if phase_duration < current_time_from_zero:
-
-                        print(angle_for_this_servo)
-
-                        # Reset the timer
-                        phase_start_time = time.time()
-
-                        # Move to the next phase
-                        if phase < 4:
-                            phase += 1
-
-                    if phase == 3:
-                        robot_is_stopping = False
+                        # Go through each servo
                         for servo in range(0, number_of_servos):
-                            kit.servo[servo].angle = None
-                        phase = 0
-                        break
+
+                            # Calculate how much we need to move based on time
+                            angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
+                            # Move the servo
+                            kit.servo[servo].angle = angle_for_this_servo
+
+                            # Record the current angle for each servo
+                            servo_current_position[servo] = angle_for_this_servo
+
+                        # When the phase ends
+                        if phase_duration < current_time_from_zero:
+
+                            print(angle_for_this_servo)
+
+                            # Reset the timer
+                            phase_start_time = time.time()
+
+                            # Move to the next phase
+                            if phase < 4:
+                                phase += 1
+
+                        if phase == 3:
+                            robot_is_stopping = False
+                            for servo in range(0, number_of_servos):
+                                kit.servo[servo].angle = None
+                            phase = 0
+                            break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
