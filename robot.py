@@ -296,7 +296,7 @@ def turn_on_robot_locomotion():
             print("Robot is now stopping, phase is ", phase)
 
             current_walking_phase = phase
-            phase = 1
+            phase = 0
 
             # Check which phase we're in and which legs are up or down
             if current_walking_phase == 1 or current_walking_phase == 4:
@@ -307,7 +307,7 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-            for phase in range(1, 5):
+            for phase in range(0, 4):
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
 
                     # Legs which are raised
@@ -368,7 +368,7 @@ def turn_on_robot_locomotion():
                         # Move to the next phase
                         phase += 1
 
-                        if phase == 4:
+                        if phase == 3:
                             robot_is_stopping = False
 
                             for servo in range(0, number_of_servos):
