@@ -193,7 +193,7 @@ def turn_on_robot_locomotion():
         if robot_is_walking:
             # Set our timer for the first loop
             phase_start_time = time.time()
-
+            print("Phase = ", phase)
             # Calculate the phase duration based on input
             phase_range = phase_duration_max - phase_duration_min
             phase_duration = (moving_speed * phase_range) + phase_duration_min
@@ -294,15 +294,13 @@ def turn_on_robot_locomotion():
             phase = 1
 
             # Check which phase we're in and which legs are up or down
-            if current_walking_phase == 1 or phase == 4:
+            if current_walking_phase == 1 or current_walking_phase == 4:
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
-            if current_walking_phase == 2 or phase == 3:
+            if current_walking_phase == 2 or current_walking_phase == 3:
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
-
-
 
             for phase in range (1,5):
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
