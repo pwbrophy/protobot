@@ -23,8 +23,9 @@ def generate_servo_movement_curve(this_servo_current_position,
     set_a_phase = phase
     set_b_phase = (phase + 2) % 4
 
-    print(set_a_phase)
-    print(hip_target_position_phase)
+    print("Set A phase is",set_a_phase)
+    print("Hip target position array is", hip_target_position_phase)
+    print("Knee target position array is", knee_target_position_phase)
 
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
