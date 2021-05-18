@@ -310,15 +310,15 @@ def turn_on_robot_locomotion():
 
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
 
-                    # Legs which are raised
-                    if servo_params[servo][LegsWhichAreUp]:
+                    # If this servo is part of a set which is raised
+                    if servo_params[servo][1] == LegsWhichAreUp:
                         hip_phase_order = stop_raised_hip_phase_order
                         hip_smooth = stop_raised_hip_smooth
                         knee_phase_order = stop_raised_knee_phase_order
                         knee_smooth = stop_raised_knee_smooth
 
-                    # Legs which are down
-                    if servo_params[servo][LegsWhichAreDown]:
+                    # If this servo is part of a set which is down
+                    if servo_params[servo][1] == LegsWhichAreDown:
                         hip_phase_order = stop_down_hip_phase_order
                         hip_smooth = stop_down_hip_smooth
                         knee_phase_order = stop_down_knee_phase_order
