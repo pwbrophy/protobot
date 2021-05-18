@@ -284,7 +284,6 @@ def turn_on_robot_locomotion():
                 if not robot_is_walking:
 
                     # Stop the robot
-                    global robot_is_stopping
                     robot_is_stopping = True
 
                     break
