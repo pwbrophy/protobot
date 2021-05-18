@@ -23,8 +23,6 @@ def generate_servo_movement_curve(this_servo_current_position,
     set_a_phase = phase
     set_b_phase = (phase + 2) % 4
 
-    print("This servo is at ", this_servo_current_position, "Set A phase is", set_a_phase, "Set B phase is", set_b_phase)
-
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
     knee_target_position_a = knee_target_position_phase[set_a_phase]
@@ -107,7 +105,6 @@ def generate_servo_movement_curve(this_servo_current_position,
 
 def calculate_curve(curve_type, start_angle, end_angle, duration):
     # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear
-    print("Start Angle: ", start_angle, " End Angle: ", end_angle)
 
     if curve_type == 0:
         return CubicEaseInOut(start=start_angle, end=end_angle, duration=duration)
