@@ -66,6 +66,9 @@ class MyApp(App):
         global robot_is_walking
         robot_is_walking = True
 
+        global robot_is_stopping
+        robot_is_stopping = False
+
     def walk_forwards_end(self, emitter, x, y):
         global robot_is_walking
         robot_is_walking = False
@@ -289,11 +292,9 @@ def turn_on_robot_locomotion():
                     break
 
         if robot_is_stopping:
-            # Set our timer for the first loop
-
             print()
             print()
-            print("Robot is now stopping, phase is ", phase)
+            print("Robot is now stopping, walking phase ended at ", phase)
 
             current_walking_phase = phase
             phase = 0
@@ -307,9 +308,14 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
-            while True:  # Cycle through each phase
+            while True:  # Cycle through each phase until the robot has finished stopping
+
+                if not robot_is_stopping:
+                    break
+
                 print("Robot stopping phase ", phase)
-                phase_start_time = time.time()  # Restart the phase timer
+                # Set our timer for the first loop
+                phase_start_time = time.time()
 
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
                     if servo == 11:
@@ -343,7 +349,7 @@ def turn_on_robot_locomotion():
                                                                                             hip_smooth,
                                                                                             knee_phase_order,
                                                                                             knee_smooth,
-                                                                                            1,
+                                                                                            phase_duration,
                                                                                             hip_center,
                                                                                             knee_center
                                                                                             )
@@ -378,20 +384,20 @@ def turn_on_robot_locomotion():
                         phase_start_time = time.time()
 
                         # Move to the next phase
-                        if phase < 4:
-                            phase += 1
-                            print("Phase is now", phase)
+
+                        phase += 1
+                        print("Phase is now", phase)
+
+                        if phase == 3:
+
+                            robot_is_stopping = False
+
+                            for servo in range(0, number_of_servos):  # Turn off all the servos
+                                kit.servo[servo].angle = None
 
                         break
 
-                    if phase == 3:
 
-                        robot_is_stopping = False
-
-                        for servo in range(0, number_of_servos):  # Turn off all the servos
-                            kit.servo[servo].angle = None
-                        phase = 0
-                        break
 
 # starts the web server
 start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
