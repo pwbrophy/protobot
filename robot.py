@@ -318,7 +318,7 @@ def turn_on_robot_locomotion():
                 phase_start_time = time.time()
 
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
-
+                    print("making servo curve for servo #", servo)
                     # If this servo is part of a set which is raised, used the raised stop gait
                     if servo_params[servo][1] == LegsWhichAreUp:
                         print("this leg is UP!", stop_raised_hip_phase_order)
