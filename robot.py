@@ -66,8 +66,8 @@ class MyApp(App):
         global robot_is_walking
         robot_is_walking = True
 
-        global robot_is_stopping
-        robot_is_stopping = False
+        #global robot_is_stopping
+        #robot_is_stopping = False
 
     def walk_forwards_end(self, emitter, x, y):
         global robot_is_walking
@@ -287,7 +287,7 @@ def turn_on_robot_locomotion():
                 if not robot_is_walking:
 
                     # Stop the robot
-                    robot_is_stopping = True
+                    # robot_is_stopping = True
 
                     break
 
@@ -389,6 +389,8 @@ def turn_on_robot_locomotion():
                         print("Phase is now", phase)
 
                         if phase == 3:
+
+
 
                             robot_is_stopping = False
 
