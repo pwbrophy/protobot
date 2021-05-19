@@ -1,3 +1,10 @@
+a = 1
+b = 22
+c = 90
 
-for phase in range (1,5):
-    print(phase)
+while True:
+    if a == 1:
+        print(22)
+        break
+    print(c)
+

@@ -388,7 +388,7 @@ def turn_on_robot_locomotion():
 
                             for servo in range(0, number_of_servos):  # Turn off all the servos
                                 kit.servo[servo].angle = None
-
+                            break
                         # Move to the next phase
                         phase += 1
                         print("Phase is now", phase)
