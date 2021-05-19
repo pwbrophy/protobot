@@ -66,7 +66,7 @@ class MyApp(App):
         global robot_is_walking
         robot_is_walking = True
 
-        #global robot_is_stopping
+        #global robot_is_stoppin
         #robot_is_stopping = False
 
     def walk_forwards_end(self, emitter, x, y):
