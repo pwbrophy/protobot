@@ -151,7 +151,7 @@ def turn_on_robot_locomotion():
     stop_down_knee_phase_order = [-1, -1, knee_up, knee_center]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_down_hip_smooth = [0, 0, 0, 0]
-    stop_down_knee_smooth = [0, 0, 0, 0]
+    stop_down_knee_smooth = [0, 1, 2, 0]
 
     # Set each servo parameters
     servo_params = []
@@ -306,11 +306,11 @@ def turn_on_robot_locomotion():
             print("Current walking phase is ", current_walking_phase)
 
             # Check which phase we're in and which legs are up or down
-            if current_walking_phase == 1 or current_walking_phase == 2:
+            if current_walking_phase == 0 or current_walking_phase == 3:
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
-            if current_walking_phase == 0 or current_walking_phase == 3:
+            if current_walking_phase == 1 or current_walking_phase == 2:
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
