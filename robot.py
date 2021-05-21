@@ -342,11 +342,11 @@ def turn_on_robot_locomotion():
                         knee_phase_order = stop_down_knee_phase_order
                         knee_smooth = stop_down_knee_smooth
 
-                    this_servo_current_position = servo_current_position[servo]
+                    this_servo_current_position = servo_current_position_with_turning_multiplier[servo]
                     this_servo_params = servo_params[servo]
 
                     # servo number | start position | servo parameters | phase
-                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(servo_current_position_with_turning_multiplier,
+                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
                                                                                             this_servo_params,
                                                                                             phase,
                                                                                             hip_phase_order,
