@@ -313,6 +313,7 @@ def turn_on_robot_locomotion():
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
+            print()
 
 
             while True:  # Cycle through each phase until the robot has finished stopping
