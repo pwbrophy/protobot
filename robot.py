@@ -219,7 +219,8 @@ def turn_on_robot_locomotion():
                                                                                         walk_forwards_knee_smooth,
                                                                                         phase_duration,
                                                                                         hip_center,
-                                                                                        knee_center
+                                                                                        knee_center,
+                                                                                        2
                                                                                         )
                 if servo == 11:
                     print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
@@ -357,7 +358,8 @@ def turn_on_robot_locomotion():
                                                                                             knee_smooth,
                                                                                             phase_duration,
                                                                                             hip_center,
-                                                                                            knee_center
+                                                                                            knee_center,
+                                                                                            0
                                                                                             )
 
                     print("Servo ", servo, ", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))

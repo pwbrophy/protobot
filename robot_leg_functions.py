@@ -18,10 +18,11 @@ def generate_servo_movement_curve(this_servo_current_position,
                                   knee_smooth_phase,
                                   phase_duration,
                                   hip_center,
-                                  knee_center):
+                                  knee_center,
+                                  phase_offset):
 
     set_a_phase = phase
-    set_b_phase = (phase + 2) % 4
+    set_b_phase = (phase + phase_offset) % 4
 
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
