@@ -378,7 +378,7 @@ def turn_on_robot_locomotion():
                         kit.servo[servo].angle = angle_for_this_servo
 
                         # Record the current angle for each servo
-                        servo_current_position[servo] = servo_current_position_with_turning_multiplier
+                        servo_current_position_with_turning_multiplier[servo] = angle_for_this_servo
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero:
