@@ -22,7 +22,9 @@ def generate_servo_movement_curve(this_servo_current_position,
                                   phase_offset):
 
     set_a_phase = phase
+    print(set_a_phase)
     set_b_phase = (phase + phase_offset) % 4
+    print(set_b_phase)
 
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]

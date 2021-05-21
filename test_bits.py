@@ -1,10 +1,5 @@
-a = 1
-b = 22
-c = 90
-
-while True:
-    if a == 1:
-        print(22)
-        break
-    print(c)
-
+print(0 % 4)
+print(1 % 4)
+print(2 % 4)
+print(3 % 4)
+print(4 % 4)
