@@ -329,7 +329,8 @@ def turn_on_robot_locomotion():
                                                                                             phase_duration,
                                                                                             hip_center,
                                                                                             knee_center,
-                                                                                            0
+                                                                                            0,
+                                                                                            turning_speed
                                                                                             )
 
                     print("Servo ", servo, ", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
