@@ -179,6 +179,7 @@ def turn_on_robot_locomotion():
 
     for servo in range(0, number_of_servos):
         servo_current_position.append(0)
+        servo_current_position_with_turning_multiplier.append(0)
 
     # Set the starting angle for all of the hips
     for hip in range(0, 6):
