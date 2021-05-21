@@ -274,6 +274,7 @@ def turn_on_robot_locomotion():
             current_walking_phase = phase
             phase = 0
 
+
             print("Current walking phase is ", current_walking_phase)
 
             # Check which phase we're in and which legs are up or down
@@ -286,6 +287,9 @@ def turn_on_robot_locomotion():
                 print("We should be in walking phase 2 or 3")
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
+
+            # This is used to stop the steering
+            # turning_while_stopping = turning_speed
 
             while True:  # Cycle through each phase until the robot has finished stopping
 
@@ -330,7 +334,7 @@ def turn_on_robot_locomotion():
                                                                                             hip_center,
                                                                                             knee_center,
                                                                                             0,
-                                                                                            turning_speed
+                                                                                            0
                                                                                             )
 
                     print("Servo ", servo, ", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
