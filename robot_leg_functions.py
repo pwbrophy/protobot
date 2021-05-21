@@ -19,12 +19,11 @@ def generate_servo_movement_curve(this_servo_current_position,
                                   phase_duration,
                                   hip_center,
                                   knee_center,
-                                  phase_offset):
+                                  phase_offset,
+                                  turning_speed):
 
     set_a_phase = phase
-    print(set_a_phase)
     set_b_phase = (phase + phase_offset) % 4
-    print(set_b_phase)
 
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
@@ -39,6 +38,10 @@ def generate_servo_movement_curve(this_servo_current_position,
         knee_target_position_a = this_servo_current_position
     if knee_target_position_b == -1:
         knee_target_position_b = this_servo_current_position
+
+    # Turn based on the input
+    hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
+    hip_target_position_b = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
 
     # Hips
     if this_servo_params[0]:
@@ -105,6 +108,29 @@ def generate_servo_movement_curve(this_servo_current_position,
                                        knee_target_position_b,
                                        phase_duration)
 
+    # Apply turning multiplier
+
+
+
+def apply_turning(servo_angle, turning, hip_is_right, hip_center):
+    # Right hips
+    if hip_is_right:
+        # Get the offset from the center position
+        offset = servo_angle - hip_center
+        if turning > 0:  # If we are turning right, slow down the right servos
+            # Map the range 0 to +1 to the range +1 to -1
+            right_turn_speed = (turning - 0.5)*-2
+            # Multiply the offset by the input
+            offset = offset * right_turn_speed
+        return hip_center + offset
+    #
+    # Left hips
+    if not hip_is_right:
+        offset = servo_angle - hip_center
+        if turning < 0:
+            left_turn_speed = (turning + 0.5)*-2
+            offset = offset * -left_turn_speed
+        return hip_center + offset
 
 def calculate_curve(curve_type, start_angle, end_angle, duration):
     # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear

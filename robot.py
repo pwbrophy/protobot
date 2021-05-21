@@ -175,11 +175,9 @@ def turn_on_robot_locomotion():
 
     # Initialise the list of servo current angles
     servo_current_position = []
-    servo_current_position_with_turning_multiplier = []
 
     for servo in range(0, number_of_servos):
         servo_current_position.append(0)
-        servo_current_position_with_turning_multiplier.append(0)
 
     # Set the starting angle for all of the hips
     for hip in range(0, 6):
@@ -206,6 +204,8 @@ def turn_on_robot_locomotion():
             phase_range = phase_duration_max - phase_duration_min
             phase_duration = (moving_speed * phase_range) + phase_duration_min
 
+            global turning_speed
+
             for servo in range(0, number_of_servos):  # Generate curve for each servo
                 this_servo_current_position = servo_current_position[servo]
                 this_servo_params = servo_params[servo]
@@ -220,10 +220,10 @@ def turn_on_robot_locomotion():
                                                                                         phase_duration,
                                                                                         hip_center,
                                                                                         knee_center,
-                                                                                        2
+                                                                                        2,
+                                                                                        turning_speed
                                                                                         )
-                if servo == 11:
-                    print("Servo 11, current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
+
             while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                 # Sleep a bit so that we don't hammer the processor
@@ -237,40 +237,11 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
-                    angle_with_turning_multiplier = angle_for_this_servo
-                    servo_params_for_turning = servo_params[servo]
-
-                    # Apply turning multiplier
-                    global turning_speed
-
-                    # Smooth the turning speed
-                    turning_speed_smooth_curve = LinearInOut(start=turning_speed_smooth, end=turning_speed, duration=1)
-                    turning_speed_smooth = turning_speed_smooth_curve.ease(0.01)
-
-                    # Right hips
-                    if servo_params_for_turning[0] and servo_params_for_turning[2]:
-                        # Get the offset from the center position
-                        offset = angle_for_this_servo - hip_center
-                        if turning_speed_smooth > 0:  # If we are turning right, slow down the right servos
-                            # Map the range 0 to +1 to the range +1 to -1
-                            right_turn_speed = (turning_speed_smooth - 0.5)*-2
-                            # Multiply the offset by the input
-                            offset = offset * right_turn_speed
-                        angle_with_turning_multiplier = hip_center + offset
-#
-                    # Left hips
-                    if servo_params_for_turning[0] and not servo_params_for_turning[2]:
-                        offset = angle_for_this_servo - hip_center
-                        if turning_speed_smooth < 0:
-                            left_turn_speed = (turning_speed_smooth + 0.5)*-2
-                            offset = offset * -left_turn_speed
-                        angle_with_turning_multiplier = hip_center + offset
 
                     # Move the servo
-                    kit.servo[servo].angle = angle_with_turning_multiplier
+                    kit.servo[servo].angle = angle_for_this_servo
 
                     # Record the current angle for each servo
-                    servo_current_position_with_turning_multiplier[servo] = angle_with_turning_multiplier
                     servo_current_position[servo] = angle_for_this_servo
 
                 # When the phase ends
@@ -306,16 +277,15 @@ def turn_on_robot_locomotion():
             print("Current walking phase is ", current_walking_phase)
 
             # Check which phase we're in and which legs are up or down
-            if current_walking_phase == 2 or current_walking_phase == 3:
+            if current_walking_phase == 0 or current_walking_phase == 1:
+                print("We should be in walking phase 0 or 1")
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
-            if current_walking_phase == 0 or current_walking_phase == 1:
+            if current_walking_phase == 2 or current_walking_phase == 3:
+                print("We should be in walking phase 2 or 3")
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
-
-            print()
-
 
             while True:  # Cycle through each phase until the robot has finished stopping
 
@@ -345,7 +315,7 @@ def turn_on_robot_locomotion():
                         knee_phase_order = stop_down_knee_phase_order
                         knee_smooth = stop_down_knee_smooth
 
-                    this_servo_current_position = servo_current_position_with_turning_multiplier[servo]
+                    this_servo_current_position = servo_current_position[servo]
                     this_servo_params = servo_params[servo]
 
                     # servo number | start position | servo parameters | phase
@@ -381,7 +351,7 @@ def turn_on_robot_locomotion():
                         kit.servo[servo].angle = angle_for_this_servo
 
                         # Record the current angle for each servo
-                        servo_current_position_with_turning_multiplier[servo] = angle_for_this_servo
+                        servo_current_position[servo] = angle_for_this_servo
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero:
