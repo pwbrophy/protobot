@@ -305,11 +305,11 @@ def turn_on_robot_locomotion():
             print("Current walking phase is ", current_walking_phase)
 
             # Check which phase we're in and which legs are up or down
-            if current_walking_phase == 0 or current_walking_phase == 3:
+            if current_walking_phase == 1 or current_walking_phase == 2:
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
-            if current_walking_phase == 1 or current_walking_phase == 2:
+            if current_walking_phase == 0 or current_walking_phase == 3:
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
