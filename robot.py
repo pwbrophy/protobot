@@ -175,6 +175,7 @@ def turn_on_robot_locomotion():
 
     # Initialise the list of servo current angles
     servo_current_position = []
+    servo_current_position_with_turning_multiplier = []
 
     for servo in range(0, number_of_servos):
         servo_current_position.append(0)
@@ -267,6 +268,7 @@ def turn_on_robot_locomotion():
                     kit.servo[servo].angle = angle_with_turning_multiplier
 
                     # Record the current angle for each servo
+                    servo_current_position_with_turning_multiplier[servo] = angle_with_turning_multiplier
                     servo_current_position[servo] = angle_for_this_servo
 
                 # When the phase ends
@@ -299,6 +301,8 @@ def turn_on_robot_locomotion():
             current_walking_phase = phase
             phase = 0
 
+            print("Current walking phase is ", current_walking_phase)
+
             # Check which phase we're in and which legs are up or down
             if current_walking_phase == 0 or current_walking_phase == 3:
                 LegsWhichAreUp = True
@@ -307,6 +311,8 @@ def turn_on_robot_locomotion():
             if current_walking_phase == 1 or current_walking_phase == 2:
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
+
+
 
             while True:  # Cycle through each phase until the robot has finished stopping
 
@@ -340,7 +346,7 @@ def turn_on_robot_locomotion():
                     this_servo_params = servo_params[servo]
 
                     # servo number | start position | servo parameters | phase
-                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(this_servo_current_position,
+                    servo_curves[servo] = robot_leg_functions.generate_servo_movement_curve(servo_current_position_with_turning_multiplier,
                                                                                             this_servo_params,
                                                                                             phase,
                                                                                             hip_phase_order,
