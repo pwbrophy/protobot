@@ -39,9 +39,14 @@ def generate_servo_movement_curve(this_servo_current_position,
     if knee_target_position_b == -1:
         knee_target_position_b = this_servo_current_position
 
-    # Turn based on the input
-    hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
-    hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
+    # Turn based on the input, but only if we're not using a previous value which has already been turned
+    if (not hip_target_position_a == -1 and
+        not hip_target_position_b == -1 and
+        not knee_target_position_a == -1 and
+        not knee_target_position_b == -1):
+
+        hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
+        hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
 
     # Hips
     if this_servo_params[0]:
