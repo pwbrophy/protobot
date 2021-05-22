@@ -20,7 +20,8 @@ def generate_servo_movement_curve(this_servo_current_position,
                                   hip_center,
                                   knee_center,
                                   phase_offset,
-                                  turning_speed):
+                                  turning_speed,
+                                  use_current_position):
 
     set_a_phase = phase
     set_b_phase = (phase + phase_offset) % 4
@@ -33,16 +34,16 @@ def generate_servo_movement_curve(this_servo_current_position,
     turning_turned_off = False
 
     # If the target position for the servo is set to '-1' then we're going to use the previous version
-    if hip_target_position_a == -1:
+    if hip_target_position_a == -1 or use_current_position:
         hip_target_position_a = this_servo_current_position
         turning_turned_off = True
-    if hip_target_position_b == -1:
+    if hip_target_position_b == -1 or use_current_position:
         hip_target_position_b = this_servo_current_position
         turning_turned_off = True
-    if knee_target_position_a == -1:
+    if knee_target_position_a == -1 or use_current_position:
         knee_target_position_a = this_servo_current_position
         turning_turned_off = True
-    if knee_target_position_b == -1:
+    if knee_target_position_b == -1 or use_current_position:
         knee_target_position_b = this_servo_current_position
         turning_turned_off = True
 

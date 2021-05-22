@@ -123,14 +123,13 @@ def turn_on_robot_locomotion():
     robot_leg_functions.center_servos(hip_center, knee_center, kit)
 
     # Pause before starting walk
-    time.sleep(2)
+    # time.sleep(2)
 
     # Phases
     phase_duration = 0.5
     phase_duration_max = 0.8
     phase_duration_min = 0.2
-    number_of_phases = 4
-    phase = 1
+    phase = 0
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
@@ -192,6 +191,8 @@ def turn_on_robot_locomotion():
     for servo in range(0, number_of_servos):
         servo_curves.append(0)
 
+    use_current_position = False
+
     turning_speed_smooth = 0
 
     print("Starting our loop!")
@@ -221,8 +222,11 @@ def turn_on_robot_locomotion():
                                                                                         hip_center,
                                                                                         knee_center,
                                                                                         2,
-                                                                                        turning_speed
+                                                                                        turning_speed,
+                                                                                        use_current_position
                                                                                         )
+
+            use_current_position = False
 
             while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
@@ -273,7 +277,7 @@ def turn_on_robot_locomotion():
 
             current_walking_phase = phase
             phase = 0
-
+            use_current_position = True
 
             print("Current walking phase is ", current_walking_phase)
 
@@ -340,10 +344,13 @@ def turn_on_robot_locomotion():
                                                                                             hip_center,
                                                                                             knee_center,
                                                                                             0,
-                                                                                            0
+                                                                                            0,
+                                                                                            use_current_position
                                                                                             )
 
                     print("Servo ", servo, ", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
+
+                use_current_position = False
 
                 while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
@@ -372,7 +379,7 @@ def turn_on_robot_locomotion():
 
                         if phase == 3:
                             robot_is_stopping = False
-
+                            use_current_position = True
                             for servo in range(0, number_of_servos):  # Turn off all the servos
                                 kit.servo[servo].angle = None
                             break
