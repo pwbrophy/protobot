@@ -24,11 +24,15 @@ def generate_servo_movement_curve(this_servo_current_position,
 
     set_a_phase = phase
     set_b_phase = (phase + phase_offset) % 4
-
+    print(hip_target_position_a)
+    print(hip_target_position_b)
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
     knee_target_position_a = knee_target_position_phase[set_a_phase]
     knee_target_position_b = knee_target_position_phase[set_b_phase]
+
+    print(hip_target_position_a)
+    print(hip_target_position_b)
 
     turning_turned_off = False
 
@@ -46,10 +50,15 @@ def generate_servo_movement_curve(this_servo_current_position,
         knee_target_position_b = this_servo_current_position
         turning_turned_off = True
 
+    if turning_turned_off:
+        print("The turning is turned off because we are using the previous position")
     # Turn based on the input, but only if we're not using a previous value which has already been turned
     if not turning_turned_off:
         hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
         hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
+
+    print(hip_target_position_a)
+    print(hip_target_position_b)
 
     # Hips
     if this_servo_params[0]:
