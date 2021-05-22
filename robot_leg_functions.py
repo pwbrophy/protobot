@@ -71,7 +71,7 @@ def generate_servo_movement_curve(this_servo_current_position,
                                        phase_duration)
             # Left legs
             if not this_servo_params[2]:
-                left_servo_target_angle = get_left_leg_angle(hip_target_position_a, hip_center)
+                left_servo_target_angle = get_left_leg_angle(hip_target_position_a, hip_center, turning_turned_off)
                 return calculate_curve(hip_smooth_phase[set_a_phase],
                                        this_servo_current_position,
                                        left_servo_target_angle,
@@ -86,7 +86,7 @@ def generate_servo_movement_curve(this_servo_current_position,
                                        phase_duration)
             # Left Legs
             if not this_servo_params[2]:
-                left_leg_target_angle = get_left_leg_angle(hip_target_position_b, hip_center)
+                left_leg_target_angle = get_left_leg_angle(hip_target_position_b, hip_center, turning_turned_off)
                 return calculate_curve(hip_smooth_phase[set_b_phase],
                                        this_servo_current_position,
                                        left_leg_target_angle,
@@ -161,7 +161,8 @@ def calculate_curve(curve_type, start_angle, end_angle, duration):
         return LinearInOut(start=start_angle, end=end_angle, duration=duration)
 
 
-def get_left_leg_angle(right_leg_angle, center):
-    hip_offset = right_leg_angle - center
-    left_leg_angle = center - hip_offset
+def get_left_leg_angle(right_leg_angle, center, turning_turned_off):
+    if not turning_turned_off:
+        hip_offset = right_leg_angle - center
+        left_leg_angle = center - hip_offset
     return left_leg_angle
