@@ -9,19 +9,19 @@ def center_servos(hip_center, knee_center, kit):
         kit.servo[servos].angle = knee_center
 
 
-def generate_servo_movement_curve(this_servo_current_position,
-                                  this_servo_params,
-                                  phase,
-                                  hip_target_position_phase,
-                                  hip_smooth_phase,
-                                  knee_target_position_phase,
-                                  knee_smooth_phase,
-                                  phase_duration,
-                                  hip_center,
-                                  knee_center,
-                                  phase_offset,
-                                  turning_speed,
-                                  use_current_position):
+def generate_servo_movement_curve(this_servo_current_position,    # Current position of the servo
+                                  this_servo_params,              # Parameters related to this servo
+                                  phase,                          # Current phase that we're in
+                                  hip_target_position_phase,      # The array containing all the hip targets
+                                  hip_smooth_phase,               # The array containing all the hip target smoothing
+                                  knee_target_position_phase,     # The array containing all the knee targets
+                                  knee_smooth_phase,              # The array containing all the knee target smoothing
+                                  phase_duration,                 # How long our phase should last
+                                  hip_center,                     # The center point of the hip movement
+                                  knee_center,                    # The center point of the knee movement
+                                  phase_offset,                   # How many phases we shift the 'b' set legs
+                                  turning_speed,                  # The amount we shift adjust the legs for turning
+                                  use_current_position):          # True = blend to the current position, not the array
 
     set_a_phase = phase
     set_b_phase = (phase + phase_offset) % 4
@@ -31,7 +31,7 @@ def generate_servo_movement_curve(this_servo_current_position,
     knee_target_position_a = knee_target_position_phase[set_a_phase]
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
-    turning_turned_off = False
+    turning_turned_off = False      # Make sure turning is turned on
 
     # If the target position for the servo is set to '-1' then we're going to use the previous version
     if hip_target_position_a == -1 or use_current_position:
@@ -47,7 +47,7 @@ def generate_servo_movement_curve(this_servo_current_position,
         knee_target_position_b = this_servo_current_position
         turning_turned_off = True
 
-    # Turn based on the input, but only if we're not using a previous value which has already been turned
+    # Turn based on the input, but only if we're not using a previous phase value which has already been turned
     if not turning_turned_off:
         hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
         hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)

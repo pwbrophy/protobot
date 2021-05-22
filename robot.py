@@ -53,7 +53,7 @@ class MyApp(App):
 
         self.thread_alive_flag = True
         self.my_thread_result = 0
-        # Here I start a parallel thread that executes my algorithm for a long time
+        # Here I start a parallel thread that executes my algorithm for a long time!
         t = threading.Thread(target=turn_on_robot_locomotion)
         t.start()
 
