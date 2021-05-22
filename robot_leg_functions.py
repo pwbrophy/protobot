@@ -162,7 +162,9 @@ def calculate_curve(curve_type, start_angle, end_angle, duration):
 
 
 def get_left_leg_angle(right_leg_angle, center, turning_turned_off):
+    left_leg_angle = right_leg_angle
     if not turning_turned_off:
         hip_offset = right_leg_angle - center
         left_leg_angle = center - hip_offset
+
     return left_leg_angle
