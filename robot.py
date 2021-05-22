@@ -1,8 +1,5 @@
 from adafruit_servokit import ServoKit
-from easing_functions import *
-from datetime import timedelta
 import time
-import numpy as np
 import robot_leg_functions
 from remi.gui import *
 from remi import start, App
@@ -20,6 +17,7 @@ turning_speed = 0
 
 global moving_speed
 moving_speed = 0
+
 
 class MyApp(App):
     def __init__(self, *args):
@@ -200,7 +198,6 @@ def turn_on_robot_locomotion():
         if robot_is_walking:
             # Set our timer for the first loop
             phase_start_time = time.time()
-            print("WALKING - Phase = ", phase)
             # Calculate the phase duration based on input
             phase_range = phase_duration_max - phase_duration_min
             phase_duration = (moving_speed * phase_range) + phase_duration_min
@@ -251,12 +248,10 @@ def turn_on_robot_locomotion():
                 # When the phase ends
                 if phase_duration < current_time_from_zero:
 
-                    print(angle_for_this_servo)
                     # Reset the timer
                     phase_start_time = time.time()
 
                     # Move to the next phase
-                    print("Phase ",  phase, " ended")
                     phase += 1
                     phase = phase % 4
 
@@ -271,24 +266,18 @@ def turn_on_robot_locomotion():
                     break
 
         if robot_is_stopping:
-            print()
-            print()
-            print("Robot is now stopping, walking phase ended at ", phase)
 
             current_walking_phase = phase
             phase = 0
             use_current_position = True
 
-            print("Current walking phase is ", current_walking_phase)
 
             # Check which phase we're in and which legs are up or down
             if current_walking_phase == 0 or current_walking_phase == 1:
-                print("We should be in walking phase 0 or 1")
                 LegsWhichAreUp = True
                 LegsWhichAreDown = False
 
             if current_walking_phase == 2 or current_walking_phase == 3:
-                print("We should be in walking phase 2 or 3")
                 LegsWhichAreUp = False
                 LegsWhichAreDown = True
 
@@ -300,18 +289,12 @@ def turn_on_robot_locomotion():
                 if not robot_is_stopping:
                     break
 
-                print("Robot stopping phase ", phase)
                 # Set our timer for the first loop
                 phase_start_time = time.time()
 
                 for servo in range(0, number_of_servos):  # Generate curve for each servo
-                    print("making servo curve for servo #", servo)
                     # If this servo is part of a set which is raised, used the raised stop gait
                     if servo_params[servo][1] == LegsWhichAreUp:
-                        if servo_params[servo][0]:
-                            print("This hip is UP!", stop_raised_hip_phase_order)
-                        if not servo_params[servo][0]:
-                            print("This knee is UP!", stop_raised_knee_phase_order)
                         hip_phase_order = stop_raised_hip_phase_order
                         hip_smooth = stop_raised_hip_smooth
                         knee_phase_order = stop_raised_knee_phase_order
@@ -320,10 +303,6 @@ def turn_on_robot_locomotion():
                     # If this servo is part of a set which is down, use the down stop gait
 
                     if servo_params[servo][1] == LegsWhichAreDown:
-                        if servo_params[servo][0]:
-                            print("This hip is DOWN!", stop_down_knee_phase_order)
-                        if not servo_params[servo][0]:
-                            print("This knee is DOWN!", stop_down_knee_phase_order)
                         hip_phase_order = stop_down_hip_phase_order
                         hip_smooth = stop_down_hip_smooth
                         knee_phase_order = stop_down_knee_phase_order
@@ -348,7 +327,6 @@ def turn_on_robot_locomotion():
                                                                                             use_current_position
                                                                                             )
 
-                    print("Servo ", servo, ", current position is ", this_servo_current_position, " target position = ", servo_curves[servo].ease(phase_duration))
 
                 use_current_position = False
 
@@ -385,7 +363,6 @@ def turn_on_robot_locomotion():
                             break
                         # Move to the next phase
                         phase += 1
-                        print("Phase is now", phase)
 
                         break
 

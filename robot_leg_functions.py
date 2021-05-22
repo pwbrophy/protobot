@@ -117,11 +117,8 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
                                        knee_target_position_b,
                                        phase_duration)
 
-    # Apply turning multiplier
-
-
-
 def apply_turning(servo_angle, turning, hip_is_right, hip_center):
+    # Apply turning multiplier
     # Right hips
     if hip_is_right:
         # Get the offset from the center position
@@ -132,7 +129,7 @@ def apply_turning(servo_angle, turning, hip_is_right, hip_center):
             # Multiply the offset by the input
             offset = offset * right_turn_speed
         return hip_center + offset
-    #
+
     # Left hips
     if not hip_is_right:
         offset = servo_angle - hip_center
