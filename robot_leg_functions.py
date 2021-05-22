@@ -30,26 +30,26 @@ def generate_servo_movement_curve(this_servo_current_position,
     knee_target_position_a = knee_target_position_phase[set_a_phase]
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
-    turn_off_turning = False
+    turning_turned_off = False
 
     # If the target position for the servo is set to '-1' then we're going to use the previous version
     if hip_target_position_a == -1:
         hip_target_position_a = this_servo_current_position
-        turn_off_turning = True
+        turning_turned_off = True
     if hip_target_position_b == -1:
         hip_target_position_b = this_servo_current_position
-        turn_off_turning = True
+        turning_turned_off = True
     if knee_target_position_a == -1:
         knee_target_position_a = this_servo_current_position
-        turn_off_turning = True
+        turning_turned_off = True
     if knee_target_position_b == -1:
         knee_target_position_b = this_servo_current_position
-        turn_off_turning = True
+        turning_turned_off = True
 
     # Turn based on the input, but only if we're not using a previous value which has already been turned
-    if not turn_off_turning:
-        hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
-        hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
+    # if not turning_turned_off:
+    #    hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
+    #    hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
 
     # Hips
     if this_servo_params[0]:
