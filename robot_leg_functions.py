@@ -47,9 +47,9 @@ def generate_servo_movement_curve(this_servo_current_position,
         turning_turned_off = True
 
     # Turn based on the input, but only if we're not using a previous value which has already been turned
-    # if not turning_turned_off:
-    #    hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
-    #    hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
+    if not turning_turned_off:
+        hip_target_position_a = apply_turning(hip_target_position_a, turning_speed, this_servo_params[2], hip_center)
+        hip_target_position_b = apply_turning(hip_target_position_b, turning_speed, this_servo_params[2], hip_center)
 
     # Hips
     if this_servo_params[0]:

@@ -304,7 +304,10 @@ def turn_on_robot_locomotion():
                     print("making servo curve for servo #", servo)
                     # If this servo is part of a set which is raised, used the raised stop gait
                     if servo_params[servo][1] == LegsWhichAreUp:
-                        print("this leg is UP!", stop_raised_hip_phase_order)
+                        if servo_params[servo][0]:
+                            print("This hip is UP!", stop_raised_hip_phase_order)
+                        if not servo_params[servo][0]:
+                            print("This knee is UP!", stop_raised_knee_phase_order)
                         hip_phase_order = stop_raised_hip_phase_order
                         hip_smooth = stop_raised_hip_smooth
                         knee_phase_order = stop_raised_knee_phase_order
@@ -313,7 +316,10 @@ def turn_on_robot_locomotion():
                     # If this servo is part of a set which is down, use the down stop gait
 
                     if servo_params[servo][1] == LegsWhichAreDown:
-                        print("This leg is DOWN!", stop_down_hip_phase_order)
+                        if servo_params[servo][0]:
+                            print("This hip is DOWN!", stop_down_knee_phase_order)
+                        if not servo_params[servo][0]:
+                            print("This knee is DOWN!", stop_down_knee_phase_order)
                         hip_phase_order = stop_down_hip_phase_order
                         hip_smooth = stop_down_hip_smooth
                         knee_phase_order = stop_down_knee_phase_order
@@ -360,8 +366,6 @@ def turn_on_robot_locomotion():
 
                     # When the phase ends
                     if phase_duration < current_time_from_zero:
-
-                        print(angle_for_this_servo)
 
                         # Reset the timer
                         phase_start_time = time.time()
