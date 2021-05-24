@@ -2,6 +2,7 @@ from adafruit_servokit import ServoKit
 import time
 import robot_leg_functions
 from remi.gui import *
+from widgets.toolbox_opencv import *
 from remi import start, App
 
 import threading
@@ -18,18 +19,6 @@ turning_speed = 0
 global moving_speed
 moving_speed = 0
 
-
-with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
-    output = StreamingOutput()
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    camera.rotation = 180
-    camera.start_recording(output, format='mjpeg')
-    try:
-        address = ('', 8000)
-        server = StreamingServer(address, StreamingHandler)
-        server.serve_forever()
-    finally:
-        camera.stop_recording()
 
 class MyApp(App):
     def __init__(self, *args):
@@ -60,6 +49,30 @@ class MyApp(App):
         svg0.ontouchstart.do(self.walk_forwards_begin)
         svg0.ontouchend.do(self.walk_forwards_end)
         svg0.ontouchmove.do(self.update_movement)
+
+        svg1 = Svg()
+        svg1.attr_class = "Svg"
+        svg1.attr_editor_newclass = False
+        svg1.css_height = "300.0px"
+        svg1.css_left = "165.0px"
+        svg1.css_position = "absolute"
+        svg1.css_top = "165.0px"
+        svg1.css_width = "315.0px"
+        svg1.variable_name = "svg0"
+
+        opencvvideo0 = OpencvVideo()
+        opencvvideo0.attr_class = "OpencvVideo"
+        opencvvideo0.attr_editor_newclass = False
+        opencvvideo0.css_height = "180px"
+        opencvvideo0.css_left = "210.0px"
+        opencvvideo0.css_position = "absolute"
+        opencvvideo0.css_top = "225.0px"
+        opencvvideo0.css_width = "200px"
+        opencvvideo0.framerate = 10
+        opencvvideo0.variable_name = "opencvvideo0"
+        opencvvideo0.video_source = 0
+        svg1.append(opencvvideo0,'opencvvideo0')
+
 
         self.thread_alive_flag = True
         self.my_thread_result = 0
