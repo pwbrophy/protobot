@@ -51,14 +51,14 @@ class MyApp(App):
         svg0.ontouchmove.do(self.update_movement)
 
         svg1 = Svg()
-        svg1.attr_class = "Svg"
+        svg1.attr_class = "Svg1"
         svg1.attr_editor_newclass = False
         svg1.css_height = "300.0px"
         svg1.css_left = "165.0px"
         svg1.css_position = "absolute"
         svg1.css_top = "165.0px"
         svg1.css_width = "315.0px"
-        svg1.variable_name = "svg0"
+        svg1.variable_name = "svg1"
 
         opencvvideo0 = OpencvVideo()
         opencvvideo0.attr_class = "OpencvVideo"
