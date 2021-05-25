@@ -6,7 +6,7 @@ from widgets.toolbox_opencv import *
 from remi import start, App
 
 
-class untitled(App):
+class MyApp(App):
     def __init__(self, *args, **kwargs):
         #DON'T MAKE CHANGES HERE, THIS METHOD GETS OVERWRITTEN WHEN SAVING IN THE EDITOR
         if not 'editing_mode' in kwargs.keys():
