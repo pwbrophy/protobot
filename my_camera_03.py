@@ -10,14 +10,14 @@ class MyApp(App):
     def __init__(self, *args, **kwargs):
         #DON'T MAKE CHANGES HERE, THIS METHOD GETS OVERWRITTEN WHEN SAVING IN THE EDITOR
         if not 'editing_mode' in kwargs.keys():
-            super(untitled, self).__init__(*args, static_file_path={'my_res':'./res/'})
+            super(MyApp, self).__init__(*args, static_file_path={'my_res':'./res/'})
 
     def idle(self):
         #idle function called every update cycle
         pass
     
     def main(self):
-        return untitled.construct_ui(self)
+        return MyApp.construct_ui(self)
         
     @staticmethod
     def construct_ui(self):
