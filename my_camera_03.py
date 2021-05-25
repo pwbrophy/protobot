@@ -51,17 +51,13 @@ class MyApp(App):
         opencvvideo0.css_width = "495.0px"
         opencvvideo0.framerate = 10
         opencvvideo0.variable_name = "opencvvideo0"
-        opencvvideo0.video_source = 1
+        opencvvideo0.video_source = 0
         container0.append(opencvvideo0,'opencvvideo0')
         
 
         self.container0 = container0
         return self.container0
     
-
-
-#Configuration
-configuration = {'config_project_name': 'untitled', 'config_address': '0.0.0.0', 'config_port': 8081, 'config_multiple_instance': True, 'config_enable_file_cache': True, 'config_start_browser': True, 'config_resourcepath': './res/'}
 
 if __name__ == "__main__":
     start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=True)
