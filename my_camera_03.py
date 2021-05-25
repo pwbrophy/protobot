@@ -51,7 +51,7 @@ class MyApp(App):
         opencvvideo0.css_width = "495.0px"
         opencvvideo0.framerate = 10
         opencvvideo0.variable_name = "opencvvideo0"
-        opencvvideo0.video_source = 0
+        opencvvideo0.video_source = -1
         container0.append(opencvvideo0,'opencvvideo0')
         
 
