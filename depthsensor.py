@@ -20,7 +20,7 @@ vl53 = adafruit_vl53l0x.VL53L0X(i2c)
 # For example a higher speed but less accurate timing budget of 20ms:
 # vl53.measurement_timing_budget = 20000
 # Or a slower but more accurate timing budget of 200ms:
-# vl53.measurement_timing_budget = 200000
+vl53.measurement_timing_budget = 200000
 # The default timing budget is 33ms, a good compromise of speed and accuracy.
 
 # Main loop will read the range and print it every second.
