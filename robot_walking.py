@@ -130,6 +130,7 @@ def turn_on_robot_locomotion():
     phase_duration_max = 0.8
     phase_duration_min = 0.2
     phase = 0
+    phase_duration_multiplier = [1, 0.5, 1, 0.5]
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
@@ -218,6 +219,7 @@ def turn_on_robot_locomotion():
                                                                                         walk_forwards_knee_phase_order,
                                                                                         walk_forwards_knee_smooth,
                                                                                         phase_duration,
+                                                                                        phase_duration_multiplier,
                                                                                         hip_center,
                                                                                         knee_center,
                                                                                         2,
