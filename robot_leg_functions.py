@@ -16,8 +16,7 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
                                   hip_smooth_phase,               # The array containing all the hip target smoothing
                                   knee_target_position_phase,     # The array containing all the knee targets
                                   knee_smooth_phase,              # The array containing all the knee target smoothing
-                                  phase_duration_raw,             # How long our phase should last
-                                  phase_duration_multiplier,      # The multiplier for the phase duration, for character
+                                  phase_duration,                 # How long our phase should last
                                   hip_center,                     # The center point of the hip movement
                                   knee_center,                    # The center point of the knee movement
                                   phase_offset,                   # How many phases we shift the 'b' set legs
@@ -33,12 +32,7 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
     turning_turned_off = False      # Make sure turning is turned on
-    print("----------")
-    print(phase)
-    print(phase_duration_raw)
-    print(phase_duration_multiplier)
-    print(phase_duration_multiplier[phase])
-    phase_duration = phase_duration_raw * phase_duration_multiplier[phase]
+
 
     # If the target position for the servo is set to '-1' then we're going to use the previous version
     if hip_target_position_a == -1 or use_current_position:

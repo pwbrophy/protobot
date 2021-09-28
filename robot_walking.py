@@ -203,7 +203,7 @@ def turn_on_robot_locomotion():
             phase_start_time = time.time()
             # Calculate the phase duration based on input
             phase_range = phase_duration_max - phase_duration_min
-            phase_duration = (moving_speed * phase_range) + phase_duration_min
+            phase_duration = ((moving_speed * phase_range) + phase_duration_min)*phase_duration_multiplier[phase]
 
             global turning_speed
 
@@ -219,7 +219,6 @@ def turn_on_robot_locomotion():
                                                                                         walk_forwards_knee_phase_order,
                                                                                         walk_forwards_knee_smooth,
                                                                                         phase_duration,
-                                                                                        phase_duration_multiplier,
                                                                                         hip_center,
                                                                                         knee_center,
                                                                                         2,
@@ -324,7 +323,6 @@ def turn_on_robot_locomotion():
                                                                                             knee_phase_order,
                                                                                             knee_smooth,
                                                                                             phase_duration,
-                                                                                            phase_duration_multiplier,
                                                                                             hip_center,
                                                                                             knee_center,
                                                                                             0,
