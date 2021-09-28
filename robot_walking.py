@@ -324,6 +324,7 @@ def turn_on_robot_locomotion():
                                                                                             knee_phase_order,
                                                                                             knee_smooth,
                                                                                             phase_duration,
+                                                                                            phase_duration_multiplier,
                                                                                             hip_center,
                                                                                             knee_center,
                                                                                             0,
