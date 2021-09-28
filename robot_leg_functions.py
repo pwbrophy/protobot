@@ -33,7 +33,10 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
     turning_turned_off = False      # Make sure turning is turned on
-
+    print(phase)
+    print(phase_duration)
+    print(phase_duration_multiplier)
+    print(phase_duration_multiplier[phase])
     phase_duration = phase_duration * phase_duration_multiplier[phase]
 
     # If the target position for the servo is set to '-1' then we're going to use the previous version
