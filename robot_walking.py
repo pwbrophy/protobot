@@ -127,17 +127,17 @@ def turn_on_robot_locomotion():
 
     # Phases
     phase_duration = 0.6
-    phase_duration_max = 1.2
-    phase_duration_min = 0.6
+    phase_duration_max = 0.9
+    phase_duration_min = 0.4
     phase = 0
-    phase_duration_multiplier = [1.5, 1, 1.5, 1]
+    phase_duration_multiplier = [1, 1, 1, 1]
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_down, knee_center]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     walk_forwards_hip_smooth = [2, 1, 2, 1]
-    walk_forwards_knee_smooth = [0, 0, 0, 0]
+    walk_forwards_knee_smooth = [0, 1, 0, 0]
 
     # Stopping gait raised leg
     stop_raised_hip_phase_order = [-1, hip_center, hip_center, hip_center]
