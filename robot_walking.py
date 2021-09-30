@@ -127,10 +127,10 @@ def turn_on_robot_locomotion():
 
     # Phases
     phase_duration = 0.5
-    phase_duration_max = 0.8
-    phase_duration_min = 0.2
+    phase_duration_max = 0.5
+    phase_duration_min = 0.1
     phase = 0
-    phase_duration_multiplier = [1, 0.3, 1, 0.3]
+    phase_duration_multiplier = [1, 0.2, 1, 0.2]
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
@@ -249,7 +249,7 @@ def turn_on_robot_locomotion():
                     servo_current_position[servo] = angle_for_this_servo
 
                 # When the phase ends
-                if phase_duration < current_time_from_zero:
+                if phase_duration <= current_time_from_zero:
 
                     # Reset the timer
                     phase_start_time = time.time()
