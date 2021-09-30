@@ -140,14 +140,14 @@ def apply_turning(servo_angle, turning, hip_is_right, hip_center):
         return hip_center + offset
 
 def calculate_curve(curve_type, start_angle, end_angle, duration):
-    # Smoothing 0 - ease both, 1 - ease out, 2 = ease in, 3 = linear
+    # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
 
     if curve_type == 0:
         return CubicEaseInOut(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 1:
-        return CubicEaseOut(start=start_angle, end=end_angle, duration=duration)
-    if curve_type == 2:
         return CubicEaseIn(start=start_angle, end=end_angle, duration=duration)
+    if curve_type == 2:
+        return CubicEaseOut(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 3:
         return LinearInOut(start=start_angle, end=end_angle, duration=duration)
 
