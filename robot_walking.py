@@ -126,11 +126,11 @@ def turn_on_robot_locomotion():
     # time.sleep(2)
 
     # Phases
-    phase_duration = 0.5
-    phase_duration_max = 0.5
-    phase_duration_min = 0.1
+    phase_duration = 0.6
+    phase_duration_max = 1.2
+    phase_duration_min = 0.6
     phase = 0
-    phase_duration_multiplier = [1, 0.2, 1, 0.2]
+    phase_duration_multiplier = [1.5, 1, 1.5, 1]
 
     # Walk forwards gait
     walk_forwards_hip_phase_order = [hip_center, hip_forwards, hip_center, hip_backwards]
