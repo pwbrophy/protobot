@@ -145,9 +145,9 @@ def calculate_curve(curve_type, start_angle, end_angle, duration):
     if curve_type == 0:
         return CubicEaseInOut(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 1:
-        return CubicEaseIn(start=start_angle, end=end_angle, duration=duration)
-    if curve_type == 2:
         return CubicEaseOut(start=start_angle, end=end_angle, duration=duration)
+    if curve_type == 2:
+        return CubicEaseIn(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 3:
         return LinearInOut(start=start_angle, end=end_angle, duration=duration)
 
