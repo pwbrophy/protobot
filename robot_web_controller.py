@@ -54,4 +54,4 @@ class MyApp(App):
 
 
 if __name__ == "__main__":
-    start(MyApp, debug=True, address='192.168.86.197', port=8081, update_interval=0.1)
+    start(MyApp, debug=True, address='192.168.86.40', port=8081, update_interval=0.1)
