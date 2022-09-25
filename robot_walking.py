@@ -366,10 +366,9 @@ def turn_on_robot_locomotion():
                             break
                         # Move to the next phase
                         phase += 1
-
                         break
 
-
-
 # starts the web server
-start(MyApp, debug=False, address='192.168.86.22', port=8081, start_browser=False, multiple_instance=False)
+start(MyApp, debug=False, address='192.168.86.40', port=8081, start_browser=False, multiple_instance=False)
+
+
