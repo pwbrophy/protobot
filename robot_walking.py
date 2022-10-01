@@ -115,7 +115,7 @@ def turn_on_robot_locomotion():
     hip_backwards = 120
 
     # Define knee positions
-    knee_center = 85
+    knee_center = 100
     knee_up = 40
     knee_down = 120
 
