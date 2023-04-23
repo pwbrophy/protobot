@@ -111,14 +111,14 @@ def turn_on_robot_locomotion():
     robot_is_stopping = False
 
     # Define hip positions
-    hip_center = 90
-    hip_forwards = 1
-    hip_backwards = 179
+    hip_center = 180
+    hip_forwards = 0
+    hip_backwards = 90
 
     # Define knee positions
     knee_center = 100
-    knee_up = 1
-    knee_down = 179
+    knee_up = 0
+    knee_down = 180
 
     # Center the legs
     robot_leg_functions.center_servos(hip_center, knee_center, kit)
@@ -337,7 +337,7 @@ def turn_on_robot_locomotion():
                 while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                     # Sleep a bit so that we don't hammer the processor
-                    time.sleep(0.005)
+                    # time.sleep(0.005)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
@@ -348,9 +348,7 @@ def turn_on_robot_locomotion():
                         # Calculate how much we need to move based on time
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         # Move the servo
-                        print("current time from zero is"+str(current_time_from_zero))
-                        print("servo_curves[servo]) is "+str(servo_curves[servo]))
-                        print("servo angle is"+str(angle_for_this_servo))
+                        angle_for_this_servo = max(0, min(angle_for_this_servo, 360))
                         kit.servo[servo].angle = angle_for_this_servo
 
                         # Record the current angle for each servo
