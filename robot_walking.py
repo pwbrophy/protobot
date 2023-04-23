@@ -111,13 +111,13 @@ def turn_on_robot_locomotion():
     robot_is_stopping = False
 
     # Define hip positions
-    hip_center = 180
     hip_forwards = 0
-    hip_backwards = 90
+    hip_center = 90
+    hip_backwards = 180
 
     # Define knee positions
-    knee_center = 100
     knee_up = 0
+    knee_center = 100
     knee_down = 180
 
     # Center the legs
