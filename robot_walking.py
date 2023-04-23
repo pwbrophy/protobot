@@ -107,6 +107,7 @@ def turn_on_robot_locomotion():
     global robot_is_walking
     robot_is_walking = False
     global robot_is_stopping
+
     robot_is_stopping = False
 
     # Define hip positions
