@@ -348,9 +348,9 @@ def turn_on_robot_locomotion():
                         # Calculate how much we need to move based on time
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         # Move the servo
-                        print("current time from zero is"+current_time_from_zero)
-                        print("servo_curves[servo]) is "+servo_curves[servo])
-                        print(angle_for_this_servo)
+                        print("current time from zero is"+str(current_time_from_zero))
+                        print("servo_curves[servo]) is "+str(servo_curves[servo]))
+                        print("servo angle is"+str(angle_for_this_servo))
                         kit.servo[servo].angle = angle_for_this_servo
 
                         # Record the current angle for each servo
