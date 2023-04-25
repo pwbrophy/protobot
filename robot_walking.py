@@ -148,7 +148,7 @@ def turn_on_robot_locomotion():
     stop_down_knee_smooth = [0, 0, 0, 0]
 
     # Stopping gait down leg (THESE GOT MIXED UP WHEN THE SERVOS FLIPPED)
-    stop_raised_hip_phase_order = [-1, -1, -1, -1]
+    stop_raised_hip_phase_order = [-1, -1, hip_center, -1]
     stop_raised_knee_phase_order = [-1, -1, -1, -1]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_raised_hip_smooth = [0, 0, 0, 0]
@@ -271,7 +271,7 @@ def turn_on_robot_locomotion():
                     break
 
         if robot_is_stopping:
-
+            print("robot has started stopping!")
             current_walking_phase = phase
             phase = 0
             use_current_position = True
@@ -343,6 +343,8 @@ def turn_on_robot_locomotion():
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time
 
+                    print("Looping through servos!")
+                    print(phase)
                     # Go through each servo
                     for servo in range(0, number_of_servos):
 
