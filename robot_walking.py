@@ -245,12 +245,12 @@ def turn_on_robot_locomotion():
 
                     # Move the servo
                     if servo > 5:
-                            angle_for_this_servo = 180-angle_for_this_servo
+                            hacked_angle_for_this_servo = 180-angle_for_this_servo
 
-                    angle_for_this_servo = max(0, min(angle_for_this_servo, 180))
+                    hacked_angle_for_this_servo = max(0, min(hacked_angle_for_this_servo, 180))
 
 
-                    kit.servo[servo].angle = angle_for_this_servo
+                    kit.servo[servo].angle = hacked_angle_for_this_servo
 
 
 
@@ -359,9 +359,9 @@ def turn_on_robot_locomotion():
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         # Move the servo
                         if servo > 5:
-                            angle_for_this_servo = 180-angle_for_this_servo
-                        angle_for_this_servo = max(0, min(angle_for_this_servo, 180))
-                        kit.servo[servo].angle = angle_for_this_servo
+                            hacked_angle_for_this_servo = 180-angle_for_this_servo
+                        hacked_angle_for_this_servo = max(0, min(hacked_angle_for_this_servo, 180))
+                        kit.servo[servo].angle = hacked_angle_for_this_servo
 
                         # Record the current angle for each servo
                         servo_current_position[servo] = angle_for_this_servo
