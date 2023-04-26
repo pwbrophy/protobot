@@ -129,7 +129,7 @@ def turn_on_robot_locomotion():
     # Phases
     phase_duration = 0.6
     phase_duration_max = 0.9
-    phase_duration_min = 0.4
+    phase_duration_min = 0.1
     phase = 0
     phase_duration_multiplier = [1, 0.8, 1, 0.8]
 
@@ -141,14 +141,14 @@ def turn_on_robot_locomotion():
     walk_forwards_knee_smooth = [1, 0, 0, 0]
 
     # Stopping gait raised leg (THESE GOT MIXED UP WHEN THE SERVOS FLIPPED)
-    stop_down_hip_phase_order = [-1, -1, hip_center, -1]
-    stop_down_knee_phase_order = [-1, knee_down, -1, knee_up]
+    stop_down_hip_phase_order = [-1, hip_center, -1, -1]
+    stop_down_knee_phase_order = [-1, knee_down, knee_up, -1]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_down_hip_smooth = [0, 0, 0, 0]
     stop_down_knee_smooth = [0, 0, 0, 0]
 
     # Stopping gait down leg (THESE GOT MIXED UP WHEN THE SERVOS FLIPPED)
-    stop_raised_hip_phase_order = [-1, -1, hip_center, -1]
+    stop_raised_hip_phase_order = [-1, -1, -1, -1]
     stop_raised_knee_phase_order = [-1, -1, -1, -1]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_raised_hip_smooth = [0, 0, 0, 0]
