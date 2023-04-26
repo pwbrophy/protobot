@@ -116,9 +116,9 @@ def turn_on_robot_locomotion():
     hip_backwards = 0
 
     # Define knee positions
-    knee_up = 0
-    knee_center = 10
-    knee_down = 180
+    knee_up = 180
+    knee_center = 170
+    knee_down = 0
 
     # Center the legs
     robot_leg_functions.center_servos(hip_center, knee_center, kit)
@@ -244,8 +244,15 @@ def turn_on_robot_locomotion():
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
 
                     # Move the servo
+                    if servo > 5:
+                            angle_for_this_servo = 180-angle_for_this_servo
+
                     angle_for_this_servo = max(0, min(angle_for_this_servo, 180))
+
+
                     kit.servo[servo].angle = angle_for_this_servo
+
+
 
                     # Record the current angle for each servo ha
                     servo_current_position[servo] = angle_for_this_servo
@@ -351,6 +358,8 @@ def turn_on_robot_locomotion():
                         # Calculate how much we need to move based on time
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         # Move the servo
+                        if servo > 5:
+                            angle_for_this_servo = 180-angle_for_this_servo
                         angle_for_this_servo = max(0, min(angle_for_this_servo, 180))
                         kit.servo[servo].angle = angle_for_this_servo
 
