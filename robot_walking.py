@@ -116,9 +116,9 @@ def turn_on_robot_locomotion():
     hip_backwards = 180
 
     # Define knee positions
-    knee_up = 180
-    knee_center = 20
-    knee_down = 0
+    knee_up = 0
+    knee_center = 160
+    knee_down = 180
 
     # Center the legs
     robot_leg_functions.center_servos(hip_center, knee_down, kit)
