@@ -342,7 +342,7 @@ def turn_on_robot_locomotion():
                 while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                     # Sleep a bit so that we don't hammer the processor
-                    time.sleep(0.005)
+                    # time.sleep(0.005)
 
                     # Start a timer for the phase
                     current_time_from_zero = time.time() - phase_start_time

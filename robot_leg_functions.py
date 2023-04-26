@@ -35,6 +35,7 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
     knee_target_position_a = knee_target_position_phase[set_a_phase]
+    print("knee target position is"+str(knee_target_position_a))
     knee_target_position_b = knee_target_position_phase[set_b_phase]
 
     turning_turned_off = False      # Make sure turning is turned on
