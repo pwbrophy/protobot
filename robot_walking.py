@@ -117,7 +117,7 @@ def turn_on_robot_locomotion():
 
     # Define knee positions
     knee_up = 0
-    knee_center = 175
+    knee_center = 5
     knee_down = 180
 
     # Center the legs
