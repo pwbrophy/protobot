@@ -141,8 +141,8 @@ def turn_on_robot_locomotion():
     walk_forwards_knee_smooth = [1, 0, 0, 0]
 
     # Stopping gait raised leg (THESE GOT MIXED UP WHEN THE SERVOS FLIPPED)
-    stop_down_hip_phase_order = [-1, hip_center, -1, -1]
-    stop_down_knee_phase_order = [-1, knee_down, knee_up, -1]
+    stop_down_hip_phase_order = [hip_center, -1, -1, -1]
+    stop_down_knee_phase_order = [knee_down, knee_up, -1, -1]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_down_hip_smooth = [0, 0, 0, 0]
     stop_down_knee_smooth = [0, 0, 0, 0]
