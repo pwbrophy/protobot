@@ -24,10 +24,13 @@ def generate_servo_movement_curve(this_servo_current_position,    # Current posi
                                   use_current_position):          # True = blend to the current position, not the array
 
     set_a_phase = phase
+    print(phase)
+    print(phase_offset)
     set_b_phase = (phase + phase_offset) % 4
 
-    print("set b phase "+str(set_a_phase))
-    print("set a phase "+str(set_b_phase))
+
+    print("set a phase "+str(set_a_phase))
+    print("set b phase "+str(set_b_phase))
 
     hip_target_position_a = hip_target_position_phase[set_a_phase]
     hip_target_position_b = hip_target_position_phase[set_b_phase]
