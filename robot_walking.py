@@ -149,7 +149,7 @@ def turn_on_robot_locomotion():
 
     # Stopping gait down leg
     stop_down_hip_phase_order = [-1, hip_center, -1, -1]
-    stop_down_knee_phase_order = [-1, -1, knee_up, knee_down]
+    stop_down_knee_phase_order = [-1, -1, knee_center, knee_down]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     stop_down_hip_smooth = [0, 0, 0, 0]
     stop_down_knee_smooth = [0, 0, 0, 0]
