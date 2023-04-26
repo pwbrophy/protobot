@@ -242,7 +242,7 @@ def turn_on_robot_locomotion():
 
                     # Calculate how much we need to move based on time
                     angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
-
+                    hacked_angle_for_this_servo = 0
                     # Move the servo
                     if servo > 5:
                             hacked_angle_for_this_servo = 180-angle_for_this_servo
@@ -358,6 +358,7 @@ def turn_on_robot_locomotion():
                         # Calculate how much we need to move based on time
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         # Move the servo
+                        hacked_angle_for_this_servo = 0
                         if servo > 5:
                             hacked_angle_for_this_servo = 180-angle_for_this_servo
                         hacked_angle_for_this_servo = max(0, min(hacked_angle_for_this_servo, 180))
