@@ -10,11 +10,11 @@ for servo in range(12):
 
 for servo in servos:
     kit.servo[servo].angle = 0
-    for i in range(3):
-        for angle in range(0, 180, 1):
+    for i in range(4):
+        for angle in range(0, 180, 2):
             kit.servo[servo].angle = angle
             time.sleep(0.01)
-        for angle in range(180, 0, 1):
+        for angle in range(180, 0, 2):
             kit.servo[servo].angle = angle
             time.sleep(0.01)
     time.sleep(2)
