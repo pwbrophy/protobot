@@ -20,7 +20,7 @@ for servo in servos:
     if servo < 6:
         kit.servo[servo].angle = 90
     if servo > 5:
-        kit.servo[servo].angle = 180
+        kit.servo[servo].angle = 0
     time.sleep(1)
     kit.servo[servo].angle = None
 
