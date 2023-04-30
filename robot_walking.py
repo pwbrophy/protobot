@@ -121,7 +121,7 @@ def turn_on_robot_locomotion():
     knee_down = 0
 
     # Center the legs
-    robot_leg_functions.center_servos(hip_center, knee_down, kit)
+    robot_leg_functions.center_servos(hip_forwards, knee_down, kit)
 
     # Pause before starting walk
     # time.sleep(2)
