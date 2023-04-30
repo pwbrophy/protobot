@@ -134,7 +134,7 @@ def turn_on_robot_locomotion():
     phase_duration_multiplier = [1, 1, 1, 1]
 
     # Walk forwards gait
-    walk_forwards_hip_phase_order = [-1, -1, -1, -1]
+    walk_forwards_hip_phase_order = [hip_center, hip_backwards, -1, -1]
     walk_forwards_knee_phase_order = [-1, -1, -1, -1]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     walk_forwards_hip_smooth = [3, 3, 3, 3]
