@@ -369,7 +369,7 @@ def turn_on_robot_locomotion():
                         # Reset the timer
                         phase_start_time = time.time()
 
-                        if phase == 3:
+                        if phase == 0:
                             robot_is_stopping = False
                             use_current_position = True
                             for servo in range(0, number_of_servos):  # Turn off all the servos
