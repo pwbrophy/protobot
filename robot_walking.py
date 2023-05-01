@@ -355,7 +355,7 @@ def turn_on_robot_locomotion():
                         angle_for_this_servo = servo_curves[servo].ease(current_time_from_zero)
                         angle_for_this_servo = max(0, min(angle_for_this_servo, 180))
                         hacked_angle_for_this_servo = 180-angle_for_this_servo
-                        if servo <=5:
+                        if servo <= 5:
                             kit.servo[servo].angle = angle_for_this_servo
                         if servo > 5:
                             kit.servo[servo].angle = hacked_angle_for_this_servo
@@ -369,11 +369,12 @@ def turn_on_robot_locomotion():
                         # Reset the timer
                         phase_start_time = time.time()
                         print("stopping phase is "+str(phase))
-                        if phase == 0:
+                        if phase == 3:
                             robot_is_stopping = False
                             use_current_position = True
                             for servo in range(0, number_of_servos):  # Turn off all the servos
                                 kit.servo[servo].angle = None
+                            print("Robot has finished stopping")
                             break
                         # Move to the next phase
                         phase += 1
