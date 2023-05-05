@@ -144,11 +144,11 @@ def calculate_curve(curve_type, start_angle, end_angle, duration):
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
 
     if curve_type == 0:
-        return ExponentialEaseInOut(start=start_angle, end=end_angle, duration=duration)
+        return CubicEaseInOut(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 1:
-        return ExponentialEaseOut(start=start_angle, end=end_angle, duration=duration)
+        return CubicEaseOut(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 2:
-        return ExponentialEaseIn(start=start_angle, end=end_angle, duration=duration)
+        return CubicEaseIn(start=start_angle, end=end_angle, duration=duration)
     if curve_type == 3:
         return LinearInOut(start=start_angle, end=end_angle, duration=duration)
 
