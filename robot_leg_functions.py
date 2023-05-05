@@ -6,7 +6,7 @@ def center_servos(hip_center, knee_center, kit):
         kit.servo[servos].angle = hip_center
 
     for servos in range(6, 12):
-        kit.servo[servos].angle = knee_center
+        kit.servo[servos].angle = 180-knee_center
 
 
 def generate_servo_movement_curve(this_servo_current_position,    # Current position of the servo
