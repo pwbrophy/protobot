@@ -367,7 +367,7 @@ def turn_on_robot_locomotion():
 
                         # Reset the timer
                         phase_start_time = time.time()
-                        print("stopping phase is "+str(phase))
+                        print("stopping phase is "+str(phase)+" -------------------")
                         if phase == 3:
                             robot_is_stopping = False
                             use_current_position = True
