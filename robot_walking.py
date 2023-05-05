@@ -138,7 +138,7 @@ def turn_on_robot_locomotion():
     walk_forwards_knee_phase_order = [knee_up, knee_center, knee_center, knee_center]
     # Smoothing 0 - ease both, 1 - ease out from current, 2 = ease in to next, 3 = linear
     walk_forwards_hip_smooth = [2, 1, 3, 3]
-    walk_forwards_knee_smooth = [2, 0, 0, 1]
+    walk_forwards_knee_smooth = [3, 0, 0, 3]
 
 
     # Stopping gait raised leg
