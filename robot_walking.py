@@ -233,7 +233,7 @@ def turn_on_robot_locomotion():
             while True:  # This loop cycles through each servo and moves it towards the target until the phase ends
 
                 # Sleep a bit so that we don't hammer the processor
-                time.sleep(0.005)
+                # time.sleep(0.005)
 
                 # Start a timer for the phase
                 current_time_from_zero = time.time() - phase_start_time
@@ -367,7 +367,6 @@ def turn_on_robot_locomotion():
 
                         # Reset the timer
                         phase_start_time = time.time()
-                        print("stopping phase is "+str(phase)+" -------------------")
                         if phase == 3:
                             robot_is_stopping = False
                             use_current_position = True
