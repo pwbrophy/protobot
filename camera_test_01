@@ -1,0 +1,32 @@
+container0 = Container()
+        container0.attr_class = "Container"
+        container0.attr_editor_newclass = False
+        container0.css_height = "450.0px"
+        container0.css_left = "135.421875px"
+        container0.css_position = "absolute"
+        container0.css_top = "106.625px"
+        container0.css_width = "600.0px"
+        container0.variable_name = "container0"
+        svg0 = Svg()
+        svg0.attr_class = "Svg"
+        svg0.attr_editor_newclass = False
+        svg0.css_height = "315.0px"
+        svg0.css_left = "60.0px"
+        svg0.css_position = "absolute"
+        svg0.css_top = "75.0px"
+        svg0.css_width = "480.0px"
+        svg0.variable_name = "svg0"
+        container0.append(svg0,'svg0')
+        opencvvideo0 = OpencvVideo()
+        opencvvideo0.attr_class = "OpencvVideo"
+        opencvvideo0.attr_editor_newclass = False
+        opencvvideo0.css_height = "210.0px"
+        opencvvideo0.css_left = "135.0px"
+        opencvvideo0.css_position = "absolute"
+        opencvvideo0.css_top = "135.0px"
+        opencvvideo0.css_width = "375.0px"
+        opencvvideo0.framerate = 10
+        opencvvideo0.variable_name = "opencvvideo0"
+        opencvvideo0.video_source = 0
+        container0.append(opencvvideo0,'opencvvideo0')
+        
