@@ -279,7 +279,7 @@ def turn_on_robot_locomotion():
             print("robot has started stopping!------------------------------------------------------")
             current_walking_phase = phase
             phase = 0
-            use_current_position = True
+            use_current_position = False
 
             # Check which phase we're in and which legs are up or down
             if current_walking_phase == 0 or current_walking_phase == 1:
